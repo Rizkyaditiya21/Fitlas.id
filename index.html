@@ -113,21 +113,39 @@ function addToCart(name, price){
   alert(name + ' berhasil ditambahkan ke keranjang');
 }
 </script>
-<button onclick="bayar()" style="
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 6px;
-">
-  Checkout / Bayar
-</button>
+<!-- Tombol Checkout -->
+<section class="checkout" style="margin: 20px 0; text-align:center;">
+  <h3>Pembayaran Manual</h3>
+  <p>Silakan transfer ke rekening berikut atau scan QRIS:</p>
+
+  <ul style="list-style:none; padding:0;">
+    <li>BCA: <strong>0990600325</strong></li>
+    <li>a.n Rizky Aditiya Fernando</li>
+  </ul>
+
+  <img src="images/qris.png" width="200" alt="QRIS" style="margin: 10px 0;">
+
+  <button id="checkoutBtn" style="
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  ">
+    Checkout / Bayar
+  </button>
+</section>
+
+<!-- Hubungkan cart.js -->
 <script src="js/cart.js"></script>
+
 
 </body>
 </html>
+
 
 
 
