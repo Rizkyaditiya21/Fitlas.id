@@ -2,55 +2,69 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>FITLAS Marketplace</title>
+<title>FITLAS Luxury Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body{
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#0f172a,#020617);
+  font-family:'Segoe UI',Arial;
+  background:linear-gradient(135deg,#020617,#0f172a);
   color:white;
 }
 header{
-  background:#ee4d2d;
-  padding:15px;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,.4);
 }
-header a{color:white;text-decoration:none;margin-left:15px}
-.banner{
+header a{
+  color:#facc15;
+  text-decoration:none;
+  font-weight:bold;
+}
+.hero{
+  padding:60px 20px;
+  text-align:center;
+  background:url("https://images.unsplash.com/photo-1600185365483-26d7a4cc7519") center/cover;
+}
+.hero h1{font-size:36px;margin-bottom:10px}
+.hero p{opacity:.9}
+.promo{
   background:#facc15;
   color:black;
   text-align:center;
-  padding:15px;
+  padding:12px;
   font-weight:bold;
 }
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,220px);
-  gap:20px;
-  padding:30px;
+  grid-template-columns:repeat(auto-fit,240px);
+  gap:25px;
+  padding:40px;
   justify-content:center;
 }
 .card{
-  background:rgba(255,255,255,0.1);
-  border-radius:12px;
-  padding:10px;
-  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+  border-radius:16px;
+  padding:15px;
 }
 .card img{
   width:100%;
-  height:170px;
+  height:180px;
   object-fit:cover;
-  border-radius:10px;
+  border-radius:12px;
 }
-.old{text-decoration:line-through;opacity:.6;font-size:13px}
-.price{color:#facc15;font-weight:bold}
+.old{opacity:.6;text-decoration:line-through;font-size:14px}
+.price{color:#facc15;font-size:18px;font-weight:bold}
 button{
   width:100%;
-  padding:8px;
+  padding:10px;
   border:none;
+  border-radius:10px;
   background:#facc15;
-  border-radius:6px;
+  font-weight:bold;
   cursor:pointer;
 }
 </style>
@@ -58,51 +72,4 @@ button{
 
 <body>
 
-<header>
-<b>FITLAS</b>
-<a href="cart.html">Keranjang 🛒</a>
-</header>
-
-<div class="banner">
-🔥 PROMO BULAN INI – DISKON BESAR SEMUA PARFUM
-</div>
-
-<div class="products" id="productList"></div>
-
-<script>
-const products = [
-  {name:"FITLAS Noir", old:150000, price:120000, img:"https://images.unsplash.com/photo-1585386959984-a41552231692"},
-  {name:"FITLAS Blanc", old:130000, price:110000, img:"https://images.unsplash.com/photo-1619995745882-f4128ac82ad6"},
-  {name:"FITLAS Rouge", old:160000, price:125000, img:"https://images.unsplash.com/photo-1594035910387-fea47794261f"},
-  {name:"FITLAS Oud", old:200000, price:150000, img:"https://images.unsplash.com/photo-1615634260167-c8cdede054de"},
-  {name:"FITLAS Ocean", old:140000, price:110000, img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"},
-  {name:"FITLAS Fresh", old:120000, price:95000, img:"https://images.unsplash.com/photo-1523293182086-7651a899d37f"}
-];
-
-const list = document.getElementById("productList");
-
-products.forEach(p=>{
-  list.innerHTML += `
-    <div class="card">
-      <img src="${p.img}">
-      <h4>${p.name}</h4>
-      <div class="old">Rp${p.old}</div>
-      <div class="price">Rp${p.price}</div>
-      <button onclick="addCart('${p.name}',${p.price})">
-        Tambah ke Keranjang
-      </button>
-    </div>
-  `;
-});
-
-function addCart(name,price){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({name,price});
-  localStorage.setItem("cart",JSON.stringify(cart));
-  alert("Produk ditambahkan ke keranjang");
-}
-</script>
-
-</body>
-</html>
-
+<he
