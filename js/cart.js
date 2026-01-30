@@ -1,15 +1,17 @@
-// Cart sederhana (bisa dikembangkan nanti)
+// ======= CART SEDERHANA =======
 let cart = [];
 
-// Tambah produk ke keranjang
-document.querySelectorAll(".addCartBtn").forEach(button => {
-  button.addEventListener("click", function() {
-    const name = this.dataset.name;
-    const price = parseInt(this.dataset.price);
-    cart.push({ name, price });
-    alert(`${name} berhasil ditambahkan ke keranjang!`);
-  });
-});
+// Contoh produk (bisa nanti dikembangkan)
+const products = [
+  { name: "FITLAS Noir", price: 120000 },
+  { name: "FITLAS Pearl", price: 150000 }
+];
+
+// Fungsi tambah produk ke keranjang (dummy)
+function addToCart(productIndex) {
+  cart.push(products[productIndex]);
+  alert(products[productIndex].name + " berhasil ditambahkan ke keranjang!");
+}
 
 // Fungsi bayar manual via WhatsApp
 function bayar() {
@@ -18,7 +20,7 @@ function bayar() {
     return;
   }
 
-  let pesan = "Halo Admin FITLAS 👋\n\nSaya ingin melakukan pembayaran manual. \n\nProduk:\n";
+  let pesan = "Halo Admin FITLAS 👋\n\nSaya ingin melakukan pembayaran manual.\n\nProduk:\n";
   let total = 0;
   cart.forEach((item, idx) => {
     pesan += `${idx+1}. ${item.name} - Rp${item.price.toLocaleString()}\n`;
@@ -26,16 +28,17 @@ function bayar() {
   });
   pesan += `\nTotal: Rp${total.toLocaleString()}\n\nTerima kasih 🙏`;
 
-  const nomor = "6281234567890"; // Ganti nomor WA kamu
+  const nomor = "6281234567890"; // ganti nomor WA kamu
   const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
   window.open(link, "_blank");
 }
 
-// Tampilkan checkout setelah klik tombol Keranjang
+// Tampilkan checkout saat klik tombol Keranjang
 document.addEventListener("DOMContentLoaded", function() {
   const checkoutSection = document.getElementById("checkoutSection");
-
   const cartBtn = document.getElementById("cartBtn");
+  const checkoutBtn = document.getElementById("checkoutBtn");
+
   if(cartBtn) {
     cartBtn.addEventListener("click", function() {
       if(cart.length === 0) {
@@ -47,6 +50,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  const checkoutBtn = document.getElementById("checkoutBtn");
   if(checkoutBtn) checkoutBtn.addEventListener("click", bayar);
 });
