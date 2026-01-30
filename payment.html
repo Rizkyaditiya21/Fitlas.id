@@ -4,41 +4,24 @@
 <meta charset="UTF-8">
 <title>Pembayaran – FITLAS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-body{
-  font-family:Arial;
-  background:linear-gradient(135deg,#0f172a,#020617);
-  color:white;
-  padding:30px;
-}
+body{font-family:Arial;background:#020617;color:white;padding:20px}
 .box{
-  background:rgba(255,255,255,0.1);
-  padding:25px;
-  border-radius:14px;
-  max-width:400px;
+  max-width:420px;
   margin:auto;
+  background:#111827;
+  padding:25px;
+  border-radius:16px;
 }
-.total{
-  font-size:26px;
-  color:#facc15;
-  font-weight:bold;
-}
+.total{font-size:26px;color:#facc15;margin:10px 0}
 button{
   width:100%;
-  margin-top:15px;
   padding:12px;
+  background:#22c55e;
   border:none;
   border-radius:10px;
-  background:#22c55e;
-  color:black;
   font-weight:bold;
-  cursor:pointer;
-}
-.note{
-  opacity:.8;
-  font-size:14px;
-  margin-top:10px;
+  margin-top:15px;
 }
 </style>
 </head>
@@ -46,45 +29,18 @@ button{
 <body>
 
 <div class="box">
-  <h2>Checkout & Pembayaran</h2>
+<h2>Checkout & Pembayaran</h2>
 
-  <p>Total yang harus dibayar:</p>
-  <div class="total">Rp<span id="total"></span></div>
+<p>Total yang harus dibayar:</p>
+<div class="total">Rp<span id="total"></span></div>
 
-  <hr>
+<hr>
 
-  <p>Silakan transfer ke rekening:</p>
-  <b>Bank BCA</b><br>
-  No Rek: <b>1234567890</b><br>
-  a.n <b>NAMA KAMU</b>
+<p><b>Transfer ke rekening:</b></p>
+<p>
+Bank BCA<br>
+No Rek: <b>0990600325</b><br>
+a.n <b>RIZKY ADITIYA FERNANDO</b>
+</p>
 
-  <p class="note">
-    Setelah transfer, klik tombol di bawah untuk konfirmasi.
-  </p>
-
-  <button onclick="confirmPayment()">
-    Saya Sudah Transfer
-  </button>
-</div>
-
-<script>
-const total = localStorage.getItem("pay") || 0;
-document.getElementById("total").innerText = total;
-
-function confirmPayment(){
-  // hapus keranjang
-  localStorage.removeItem("cart");
-  localStorage.removeItem("pay");
-
-  // ganti nomor WA kamu
-  const phone = "6281234567890";
-  const msg = `Halo FITLAS,%0ASaya sudah transfer sebesar Rp${total}.%0ATerima kasih.`;
-
-  window.location.href =
-    `https://wa.me/${phone}?text=${msg}`;
-}
-</script>
-
-</body>
-</html>
-
+<p style="opa
