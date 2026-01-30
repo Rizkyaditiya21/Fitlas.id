@@ -79,8 +79,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   el.innerText = "Total: Rp " + total.toLocaleString();
 });
 function bayar() {
-  const nomor = "6281234567890"; // GANTI nomor WA kamu
-  const pesan = `
+  const nomor = "62882000111956"; //  `
 Halo Admin 👋
 
 Saya ingin melakukan pembayaran manual.
