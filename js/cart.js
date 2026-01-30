@@ -1,54 +1,53 @@
-// ======= CART SEDERHANA =======
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Daftar produk
-const products = [
-  { name: "FITLAS Noir", price: 120000 },
-  { name: "FITLAS Pearl", price: 150000 }
-];
-
-// Tambah produk ke keranjang
-function addToCart(productIndex) {
-  cart.push(products[productIndex]);
-  alert(products[productIndex].name + " berhasil ditambahkan ke keranjang!");
+function addToCart(name, price, image) {
+  cart.push({ name, price, image });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Produk masuk ke keranjang");
 }
 
-// Fungsi bayar manual via WhatsApp
-function bayar() {
-  if(cart.length === 0) {
-    alert("Keranjang kosong! Silakan tambah produk dulu.");
-    return;
-  }
+function loadCart() {
+  let container = document.getElementById("cartItems");
+  if (!container) return;
 
-  let pesan = "Halo Admin FITLAS 👋\n\nSaya ingin melakukan pembayaran manual.\n\nProduk:\n";
+  container.innerHTML = "";
   let total = 0;
-  cart.forEach((item, idx) => {
-    pesan += `${idx+1}. ${item.name} - Rp${item.price.toLocaleString()}\n`;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    container.innerHTML += `
+      <div class="item">
+        <img src="${item.image}">
+        <div>
+          <b>${item.name}</b><br>
+          Rp ${item.price.toLocaleString()}
+        </div>
+        <button onclick="removeItem(${index})">X</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText =
+    "Total: Rp " + total.toLocaleString();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+function checkoutWA() {
+  let text = "Halo FITLAS, saya mau pesan:%0A";
+  let total = 0;
+
+  cart.forEach(item => {
+    text += "- " + item.name + "%0A";
     total += item.price;
   });
-  pesan += `\nTotal: Rp${total.toLocaleString()}\n\nTerima kasih 🙏`;
 
-  const nomor = "62882000111956"; // ganti nomor WA kamu
-  const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
-  window.open(link, "_blank");
+  text += "%0ATotal: Rp " + total.toLocaleString();
+  window.open("https://wa.me/6281234567890?text=" + text);
 }
 
-// Tampilkan checkout saat klik tombol Keranjang
-document.addEventListener("DOMContentLoaded", function() {
-  const checkoutSection = document.getElementById("checkoutSection");
-  const cartBtn = document.getElementById("cartBtn");
-  const checkoutBtn = document.getElementById("checkoutBtn");
-
-  if(cartBtn) {
-    cartBtn.addEventListener("click", function() {
-      if(cart.length === 0) {
-        alert("Keranjang kosong! Silakan pilih produk dulu.");
-        return;
-      }
-      checkoutSection.style.display = "block";
-      window.scrollTo(0, checkoutSection.offsetTop);
-    });
-  }
-
-  if(checkoutBtn) checkoutBtn.addEventListener("click", bayar);
-});
+loadCart();
