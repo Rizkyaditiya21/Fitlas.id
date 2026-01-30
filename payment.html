@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Payment - FITLAS</title>
+<script src="js/cart.js" defer></script>
+<style>
+body{font-family:Poppins,Arial;background:#f5f6f8;padding:20px}
+.box{max-width:420px;margin:auto;background:#fff;padding:25px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+h2{text-align:center}
+.total{font-size:20px;font-weight:700;text-align:center;margin:15px 0}
+.qris{width:100%;border-radius:15px;margin:20px 0}
+.info{text-align:center;font-size:14px;color:#555}
+.btn{display:block;text-align:center;background:#020617;color:#fff;padding:14px;border-radius:30px;text-decoration:none;font-weight:600;margin-top:20px}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Payment FITLAS</h2>
+
+  <div class="total" id="totalBayar">Total: Rp 0</div>
+
+  <!-- GANTI GAMBAR INI DENGAN QRIS KAMU -->
+  <img src="images/qris-fitlas.png" class="qris" alt="QRIS FITLAS">
+
+  <div class="info">
+    Scan QRIS di atas atau transfer sesuai total.<br>
+    Setelah bayar, klik tombol di bawah.
+  </div>
+
+  <a class="btn" onclick="konfirmasiBayar()">Saya Sudah Bayar</a>
+</div>
+
+</body>
+</html>
