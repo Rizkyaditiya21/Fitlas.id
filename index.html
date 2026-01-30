@@ -2,145 +2,113 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<title>FITLAS – Marketplace Parfum</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fitlas.id Ultimate Marketplace</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-* { box-sizing:border-box; margin:0; padding:0; font-family:'Montserrat',sans-serif; }
-body { background:linear-gradient(to bottom,#f5f5f5,#e0e0e0); }
-header { background:#1a1a1a; color:#fff; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000; }
-header h1 { font-size:2em; font-weight:700; letter-spacing:1px; }
-header input { padding:10px 15px; border-radius:8px; border:none; width:250px; margin-right:15px; }
-.cart-link { background:#ff6b6b; padding:12px 20px; color:#fff; text-decoration:none; border-radius:10px; font-weight:bold; transition: all 0.3s; }
-.cart-link:hover { background:#ff4757; transform:scale(1.05); }
-
-/* Carousel */
-.carousel { position:relative; max-width:1000px; margin:30px auto; overflow:hidden; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.2); }
-.carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
-.carousel-slide { min-width:100%; position:relative; }
-.carousel-slide img { width:100%; border-radius:20px; }
-.carousel-buttons { position:absolute; top:50%; width:100%; display:flex; justify-content:space-between; transform:translateY(-50%); }
-.carousel-buttons button { background:rgba(0,0,0,0.5); border:none; color:#fff; font-size:2em; padding:10px 15px; border-radius:50%; cursor:pointer; transition:all 0.3s; }
-.carousel-buttons button:hover { background:rgba(0,0,0,0.8); transform:scale(1.1); }
-
-/* Produk grid */
-.products { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:30px; padding:30px; max-width:1200px; margin:auto; }
-.product { background:#fff; border-radius:20px; padding:20px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; position:relative; overflow:hidden; }
-.product:hover { transform:translateY(-10px); box-shadow:0 15px 25px rgba(0,0,0,0.2); }
-.product img { width:100%; border-radius:15px; margin-bottom:15px; transition: transform 0.3s; }
-.product:hover img { transform:scale(1.05); }
-.product h3 { margin:10px 0 5px; font-size:1.2em; color:#333; font-weight:600; }
-.product p { color:#555; font-size:1em; margin-bottom:15px; font-weight:500; }
-button.add-to-cart { padding:10px 18px; border:none; background:#1dd1a1; color:#fff; font-weight:600; border-radius:12px; cursor:pointer; transition: all 0.3s; }
-button.add-to-cart:hover { background:#10ac84; transform:scale(1.05); }
-/* Badge promo */
-.badge { position:absolute; top:15px; left:15px; background:linear-gradient(45deg,#ff6b6b,#ff4757); color:#fff; font-size:0.9em; padding:5px 10px; border-radius:12px; font-weight:700; box-shadow:0 3px 8px rgba(0,0,0,0.2); }
-
-footer { text-align:center; padding:25px; background:#1a1a1a; color:#fff; margin-top:40px; font-size:0.9em; }
-@media(max-width:600px){ header{flex-direction:column; align-items:flex-start;} header input{width:100%; margin:15px 0;} }
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f5f5;
+}
+header{
+  background:#ee4d2d;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+}
+header a{color:white;text-decoration:none;margin-left:20px;font-weight:bold}
+.banner{
+  background:#ffecec;
+  padding:20px;
+  text-align:center;
+  font-weight:bold;
+  color:#ee4d2d;
+}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  padding:30px;
+}
+.card{
+  background:white;
+  border-radius:10px;
+  padding:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.old{
+  text-decoration:line-through;
+  color:gray;
+  font-size:13px;
+}
+.price{
+  color:#ee4d2d;
+  font-weight:bold;
+}
+.badge{
+  background:#ee4d2d;
+  color:white;
+  font-size:12px;
+  padding:3px 6px;
+  border-radius:5px;
+  display:inline-block;
+}
+button{
+  width:100%;
+  background:#ee4d2d;
+  color:white;
+  border:none;
+  padding:8px;
+  border-radius:6px;
+  margin-top:8px;
+  cursor:pointer;
+}
 </style>
 </head>
+
 <body>
 
 <header>
-  <h1>FITLAS.ID</h1>
+  <b>FITLAS</b>
   <div>
-    <input type="text" id="search" placeholder="Cari parfum...">
-    <a href="cart.html" class="cart-link">Keranjang (<span id="cart-count">0</span>)</a>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Keranjang 🛒</a>
   </div>
 </header>
 
-<!-- Carousel -->
-<div class="carousel">
-  <div class="carousel-track" id="carousel-track"></div>
-  <div class="carousel-buttons">
-    <button id="prev">&#10094;</button>
-    <button id="next">&#10095;</button>
-  </div>
+<div class="banner">
+  🎉 PROMO HARI INI – DISKON 20% + VOUCHER FITLAS10
 </div>
 
-<!-- Produk grid -->
-<div class="products" id="products"></div>
+<div class="products">
 
-<footer>
-  &copy; 2026 Fitlas.id Ultimate Marketplace. All rights reserved.
-</footer>
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1585386959984-a41552231692">
+  <span class="badge">Diskon 20%</span>
+  <h4>FITLAS Noir</h4>
+  <div class="old">Rp150.000</div>
+  <div class="price">Rp120.000</div>
+  <button onclick="add('FITLAS Noir',120000)">Tambah</button>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1619995745882-f4128ac82ad6">
+  <span class="badge">Diskon 15%</span>
+  <h4>FITLAS Blanc</h4>
+  <div class="old">Rp130.000</div>
+  <div class="price">Rp110.000</div>
+  <button onclick="add('FITLAS Blanc',110000)">Tambah</button>
+</div>
+
+</div>
 
 <script>
-// Data produk premium
-const productsData = [
-  {name:"FITLAS Noir", price:250000, img:"https://images.unsplash.com/photo-1600185366594-7b0a1e2f191e?crop=entropy&cs=tinysrgb&fit=max&h=200&w=200", promo:true},
-  {name:"FITLAS Blanc", price:200000, img:"https://images.unsplash.com/photo-1590080871594-5648f4b1b96f?crop=entropy&cs=tinysrgb&fit=max&h=200&w=200", promo:false},
-  {name:"FITLAS Rouge", price:300000, img:"https://images.unsplash.com/photo-1613145999820-62c4f0486a9d?crop=entropy&cs=tinysrgb&fit=max&h=200&w=200", promo:true},
-  {name:"FITLAS Oud", price:350000, img:"https://images.unsplash.com/photo-1603787935866-4d60e43eeaec?crop=entropy&cs=tinysrgb&fit=max&h=200&w=200", promo:false},
-  {name:"FITLAS Musk", price:280000, img:"https://images.unsplash.com/photo-1589395595558-1fa2125e1d09?crop=entropy&cs=tinysrgb&fit=max&h=200&w=200", promo:true},
-];
-
-// Render produk grid
-const productsContainer = document.getElementById('products');
-function renderProducts() {
-  productsContainer.innerHTML = productsData.map((p,i)=>`
-    <div class="product" data-index="${i}">
-      ${p.promo?'<div class="badge">PROMO</div>':''}
-      <img src="${p.img}" alt="${p.name}">
-      <h3>${p.name}</h3>
-      <p>Rp ${p.price.toLocaleString()}</p>
-      <button class="add-to-cart">Tambah ke Keranjang</button>
-    </div>
-  `).join('');
-}
-renderProducts();
-
-// Cart
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-function updateCartCount(){ document.getElementById('cart-count').textContent = cart.reduce((sum,item)=>sum+item.qty,0); }
-updateCartCount();
-
-// Tambah ke cart
-document.addEventListener('click', e=>{
-  if(e.target.classList.contains('add-to-cart')){
-    const index = e.target.parentElement.dataset.index;
-    const product = productsData[index];
-    const existing = cart.find(item=>item.name===product.name);
-    if(existing) existing.qty+=1;
-    else cart.push({name:product.name, price:product.price, qty:1, img:product.img});
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(product.name + " berhasil ditambahkan ke keranjang!");
-  }
-});
-
-// Search
-document.getElementById('search').addEventListener('input', e=>{
-  const value = e.target.value.toLowerCase();
-  document.querySelectorAll('.product').forEach(p=>{
-    const name = p.querySelector('h3').textContent.toLowerCase();
-    p.style.display = name.includes(value)?'block':'none';
-  });
-});
-
-// Carousel
-const carouselTrack = document.getElementById('carousel-track');
-productsData.forEach(p=>{
-  const slide = document.createElement('div');
-  slide.classList.add('carousel-slide');
-  slide.innerHTML = `<img src="${p.img}" alt="${p.name}">`;
-  carouselTrack.appendChild(slide);
-});
-let currentIndex = 0;
-function showSlide(index){
-  if(index<0) index=productsData.length-1;
-  if(index>=productsData.length) index=0;
-  currentIndex=index;
-  carouselTrack.style.transform = `translateX(-${currentIndex*100}%)`;
-}
-document.getElementById('prev').addEventListener('click', ()=>showSlide(currentIndex-1));
-document.getElementById('next').addEventListener('click', ()=>showSlide(currentIndex+1));
-
-// Auto slide
-setInterval(()=>showSlide(currentIndex+1),5000);
-
-</script>
-
-</body>
-</html>
+function add(n
