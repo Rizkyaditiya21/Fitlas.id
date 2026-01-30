@@ -1,45 +1,118 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>FITLAS</title>
-<script src="js/cart.js" defer></script>
-<style>
-body{font-family:Poppins,Arial;margin:0;background:#f5f6f8}
-header{background:#020617;color:#fff;padding:20px;display:flex;justify-content:space-between}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:30px}
-.card{background:#fff;padding:15px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,.1)}
-.card img{width:100%;border-radius:10px}
-button{background:#020617;color:#fff;border:none;padding:10px;border-radius:20px;cursor:pointer}
-.cart-link{color:white;text-decoration:none}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FITLAS – Perfume Marketplace</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,Arial,sans-serif;background:#f5f6f8;color:#1f2937}
+    header{background:#020617;color:#fff;padding:20px 30px;display:flex;justify-content:space-between;align-items:center}
+    header h1{margin:0;letter-spacing:3px}
+    nav a{color:#fff;margin-left:18px;text-decoration:none;font-size:14px}
+    .hero{background:linear-gradient(135deg,#020617,#1e293b);color:#fff;padding:90px 20px;text-align:center}
+    .hero h2{font-size:42px;margin-bottom:10px}
+    .hero p{opacity:.85}
+    .search{margin-top:30px}
+    .search input{width:320px;max-width:90%;padding:14px 18px;border-radius:30px;border:none}
+    section{max-width:1200px;margin:auto;padding:70px 20px}
+    .title{text-align:center;font-size:32px;margin-bottom:40px}
+    .filter{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+    .filter button{padding:10px 20px;border-radius:20px;border:1px solid #cbd5f5;background:#fff;cursor:pointer}
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
+    .card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    .card img{width:100%;border-radius:14px;margin-bottom:16px}
+    .card h3{margin:0 0 6px}
+    .card p{font-size:13px;opacity:.8}
+    .price{margin:10px 0;font-weight:700}
+    .btn{display:block;text-align:center;padding:12px;border-radius:30px;background:#020617;color:#fff;text-decoration:none;font-size:14px;cursor:pointer}
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px}
+    .feature{background:#fff;border-radius:20px;padding:28px;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+    footer{background:#020617;color:#94a3b8;text-align:center;padding:30px;font-size:14px}
+  </style>
 </head>
 <body>
 
 <header>
-<h2>FITLAS</h2>
-<a class="cart-link" href="cart.html">🛒 Keranjang</a>
+  <h1>FITLAS</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Produk</a>
+    <a href="cart.html">Keranjang</a>
+    <a href="#">Login</a>
+  </nav>
 </header>
 
-<div class="products">
-  <div class="card">
-    <img src="images/fitlas-noir.jpg">
-    <h3>FITLAS Noir</h3>
-    <p>Rp 120.000</p>
-    <button onclick="addToCart('FITLAS Noir',120000,'images/fitlas-noir.jpg')">
-      Tambah ke Keranjang
-    </button>
+<section class="hero">
+  <h2>Marketplace Parfum Premium</h2>
+  <p>Ratusan aroma • Brand terpercaya • Kirim ke seluruh Indonesia</p>
+  <div class="search">
+    <input type="text" placeholder="Cari parfum favoritmu..."/>
   </div>
+</section>
 
-  <div class="card">
-    <img src="images/fitlas-blanc.jpg">
-    <h3>FITLAS Blanc</h3>
-    <p>Rp 110.000</p>
-    <button onclick="addToCart('FITLAS Blanc',110000,'images/fitlas-blanc.jpg')">
-      Tambah ke Keranjang
-    </button>
+<section>
+  <h2 class="title">Produk Terlaris</h2>
+  <div class="products">
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x400">
+      <h3>FITLAS Noir</h3>
+      <p>Maskulin • Elegan • Tahan lama</p>
+      <div class="price">Rp 120.000</div>
+      <div class="btn" onclick="addToCart('FITLAS Noir',120000)">Tambah ke Keranjang</div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x400">
+      <h3>FITLAS Blanc</h3>
+      <p>Fresh • Clean • Daily use</p>
+      <div class="price">Rp 110.000</div>
+      <div class="btn" onclick="addToCart('FITLAS Blanc',110000)">Tambah ke Keranjang</div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x400">
+      <h3>FITLAS Rouge</h3>
+      <p>Manis • Sexy • Bold</p>
+      <div class="price">Rp 125.000</div>
+      <div class="btn" onclick="addToCart('FITLAS Rouge',125000)">Tambah ke Keranjang</div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x400">
+      <h3>FITLAS Oud</h3>
+      <p>Luxury • Warm • Exclusive</p>
+      <div class="price">Rp 150.000</div>
+      <div class="btn" onclick="addToCart('FITLAS Oud',150000)">Tambah ke Keranjang</div>
+    </div>
+
   </div>
-</div>
+</section>
+
+<section>
+  <h2 class="title">Kenapa Belanja di FITLAS?</h2>
+  <div class="features">
+    <div class="feature"><h4>100% Original</h4><p>Produk terpercaya</p></div>
+    <div class="feature"><h4>Marketplace</h4><p>Banyak brand & aroma</p></div>
+    <div class="feature"><h4>Pembayaran Mudah</h4><p>QRIS & Transfer</p></div>
+    <div class="feature"><h4>Pengiriman Cepat</h4><p>Seluruh Indonesia</p></div>
+  </div>
+</section>
+
+<footer>
+  © 2026 FITLAS Perfume Marketplace
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(name + ' berhasil ditambahkan ke keranjang');
+}
+</script>
 
 </body>
 </html>
