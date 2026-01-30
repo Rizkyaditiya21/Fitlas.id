@@ -1,79 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keranjang Belanja</title>
+<title>Keranjang - Fitlas.id</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 20px; }
-h1 { text-align: center; }
-.cart-item { display: flex; justify-content: space-between; margin: 10px 0; }
-button { padding: 5px 10px; cursor: pointer; }
-.remove-btn { background: red; color: #fff; border: none; }
-.checkout-btn { background: green; color: #fff; border: none; padding: 10px 20px; margin-top: 20px; }
+body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f5f5f5; margin:0; padding:0; }
+header { background:#222; color:#fff; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+header a { color:#ff6b6b; text-decoration:none; font-weight:bold; }
+header a:hover { color:#ff4c4c; }
+.cart-container { padding:20px; max-width:900px; margin:auto; }
+.cart-table { width:100%; border-collapse: collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+.cart-table th, .cart-table td { padding:15px; text-align:left; vertical-align:middle; }
+.cart-table th { background:#eee; font-weight:bold; }
+.cart-table img { width:60px; border-radius:8px; margin-right:10px; vertical-align:middle; }
+.cart-table td button { padding:5px 10px; background:red; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+.cart-table td button:hover { background:#c0392b; }
+.cart-total { margin-top:20px; text-align:right; font-size:1.2em; font-weight:bold; }
+.checkout-btn { margin-top:10px; padding:10px 20px; background:#1dd1a1; color:#fff; border:none; border-radius:8px; cursor:pointer; font-size:1em; float:right; }
+.checkout-btn:hover { background:#10ac84; }
+footer { text-align:center; padding:20px; background:#222; color:#fff; margin-top:30px; font-size:0.9em; }
+@media(max-width:600px){ .cart-table th,.cart-table td{font-size:0.9em; padding:10px;} }
 </style>
 </head>
 <body>
 
-<h1>Keranjang Belanja</h1>
+<header>
+  <span>Keranjang Belanja</span>
+  <a href="index.html">⬅️ Kembali Belanja</a>
+</header>
 
-<div id="cart-items"></div>
-<h3>Total: Rp <span id="total">0</span></h3>
-<button class="checkout-btn">Checkout</button>
-<br><br>
-<a href="index.html">⬅️ Kembali Belanja</a>
+<div class="cart-container">
+  <table class="cart-table" id="cart-table">
+    <thead>
+      <tr>
+        <th>Produk</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Subtotal</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="cart-body"></tbody>
+  </table>
+  <div class="cart-total">
+    Total: Rp <span id="total">0</span>
+  </div>
+  <button class="checkout-btn" id="checkout-btn">Checkout</button>
+</div>
+
+<footer>
+  &copy; 2026 Fitlas.id Marketplace. All rights reserved.
+</footer>
 
 <script>
+// Ambil cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function renderCart() {
-  const cartItems = document.getElementById('cart-items');
-  cartItems.innerHTML = '';
-  let total = 0;
-
-  if(cart.length === 0) {
-    cartItems.innerHTML = '<p>Keranjang kosong.</p>';
+// Render cart
+function renderCart(){
+  const cartBody = document.getElementById('cart-body');
+  cartBody.innerHTML='';
+  let total=0;
+  if(cart.length===0){
+    cartBody.innerHTML='<tr><td colspan="5" style="text-align:center;">Keranjang kosong</td></tr>';
+    document.getElementById('total').textContent='0';
+    return;
   }
-
-  cart.forEach((item, index) => {
-    const subtotal = item.price * item.qty;
-    total += subtotal;
-
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `
-      <span>${item.name} (x${item.qty}) - Rp ${subtotal}</span>
-      <button class="remove-btn" data-index="${index}">Hapus</button>
+  cart.forEach((item,index)=>{
+    const subtotal = item.price*item.qty;
+    total+=subtotal;
+    const row = document.createElement('tr');
+    row.innerHTML=`
+      <td><img src="https://via.placeholder.com/60?text=${item.name.split(' ')[1]}" alt="${item.name}"> ${item.name}</td>
+      <td>Rp ${item.price.toLocaleString()}</td>
+      <td>${item.qty}</td>
+      <td>Rp ${subtotal.toLocaleString()}</td>
+      <td><button data-index="${index}">Hapus</button></td>
     `;
-    cartItems.appendChild(div);
+    cartBody.appendChild(row);
   });
+  document.getElementById('total').textContent=total.toLocaleString();
 
-  document.getElementById('total').textContent = total;
-  localStorage.setItem('cart', JSON.stringify(cart));
-
-  document.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+  // Hapus item
+  document.querySelectorAll('.cart-table button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
       const i = btn.dataset.index;
       cart.splice(i,1);
+      localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
     });
   });
 }
 
-document.querySelector('.checkout-btn').addEventListener('click', () => {
-  if(cart.length === 0) {
-    alert('Keranjang kosong!');
-    return;
-  }
+// Checkout
+document.getElementById('checkout-btn').addEventListener('click', ()=>{
+  if(cart.length===0){ alert('Keranjang kosong!'); return; }
   let summary = 'Ringkasan Pembelian:\n\n';
-  let total = 0;
-  cart.forEach(item => {
-    summary += `${item.name} x${item.qty} - Rp ${item.price * item.qty}\n`;
-    total += item.price * item.qty;
+  let total=0;
+  cart.forEach(item=>{
+    summary += `${item.name} x${item.qty} - Rp ${(item.price*item.qty).toLocaleString()}\n`;
+    total += item.price*item.qty;
   });
-  summary += `\nTotal: Rp ${total}`;
+  summary += `\nTotal: Rp ${total.toLocaleString()}`;
   alert(summary);
-  cart = [];
+  cart=[];
   localStorage.setItem('cart', JSON.stringify(cart));
   renderCart();
 });
