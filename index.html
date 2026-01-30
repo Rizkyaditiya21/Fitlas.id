@@ -5,21 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fitlas.id</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-header { background: #333; color: #fff; padding: 10px; text-align: center; }
-.products { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
-.product { border: 1px solid #ccc; padding: 10px; width: 200px; text-align: center; }
-button { padding: 5px 10px; cursor: pointer; background: #28a745; color: #fff; border: none; }
-button:hover { background: #218838; }
-.cart-link { position: fixed; top: 10px; right: 10px; background: #007bff; padding: 10px; color: #fff; text-decoration: none; }
-.cart-link:hover { background: #0056b3; }
+/* Reset dasar */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Body & Header */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f9f9f9; }
+header { background: #222; color: #fff; padding: 20px; text-align: center; font-size: 1.8em; letter-spacing: 1px; }
+
+/* Link keranjang */
+.cart-link {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ff6b6b;
+  padding: 12px 18px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.cart-link:hover { background: #ff4c4c; }
+
+/* Grid produk */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 30px;
+}
+
+/* Card produk */
+.product {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Nama & harga */
+.product h3 { margin-bottom: 10px; color: #333; }
+.product p { font-size: 1.1em; margin-bottom: 15px; color: #555; }
+
+/* Tombol */
+button.add-to-cart {
+  padding: 10px 15px;
+  border: none;
+  background: #1dd1a1;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button.add-to-cart:hover {
+  background: #10ac84;
+}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>FITLAS.ID</h1>
-</header>
+<header>FITLAS.ID</header>
 
 <a href="cart.html" class="cart-link">Keranjang (<span id="cart-count">0</span>)</a>
 
@@ -42,27 +94,21 @@ button:hover { background: #218838; }
 </div>
 
 <script>
-// Ambil cart dari localStorage atau buat baru
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function updateCartCount() {
   document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
 }
 
-// Tambahkan produk ke cart
 document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const productEl = btn.parentElement;
     const name = productEl.dataset.name;
     const price = parseInt(productEl.dataset.price);
 
-    // Cek apakah produk sudah ada di cart
     const existing = cart.find(item => item.name === name);
-    if(existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({name, price, qty: 1});
-    }
+    if(existing) existing.qty += 1;
+    else cart.push({name, price, qty: 1});
 
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
