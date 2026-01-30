@@ -1,13 +1,13 @@
 // ======= CART SEDERHANA =======
 let cart = [];
 
-// Contoh produk (bisa nanti dikembangkan)
+// Daftar produk
 const products = [
   { name: "FITLAS Noir", price: 120000 },
   { name: "FITLAS Pearl", price: 150000 }
 ];
 
-// Fungsi tambah produk ke keranjang (dummy)
+// Tambah produk ke keranjang
 function addToCart(productIndex) {
   cart.push(products[productIndex]);
   alert(products[productIndex].name + " berhasil ditambahkan ke keranjang!");
@@ -28,7 +28,7 @@ function bayar() {
   });
   pesan += `\nTotal: Rp${total.toLocaleString()}\n\nTerima kasih 🙏`;
 
-  const nomor = "6281234567890"; // ganti nomor WA kamu
+  const nomor = "62882000111956"; // ganti nomor WA kamu
   const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
   window.open(link, "_blank");
 }
