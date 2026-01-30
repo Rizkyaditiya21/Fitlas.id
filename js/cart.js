@@ -91,3 +91,10 @@ Terima kasih 🙏
   const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
   window.open(link, "_blank");
 }
+function bayar() {
+  const nomor = "62882000111956"; // GANTI ke nomor WA kamu
+  const pesan = "Halo admin, saya mau melakukan pembayaran manual.";
+
+  const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+  window.open(link, "_blank");
+}
