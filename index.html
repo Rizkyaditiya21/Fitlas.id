@@ -68,5 +68,51 @@
       <h3>FITLAS Blanc</h3>
       <p>Fresh • Clean • Daily use</p>
       <div class="price">Rp 110.000</div>
-      <div class="btn" onclick="addToC
+      <div class="btn" onclick="addToCart('FITLAS Blanc',110000)">Tambah ke Keranjang</div>
+    </div>
 
+    <div class="card">
+      <img src="https://via.placeholder.com/400x400">
+      <h3>FITLAS Rouge</h3>
+      <p>Manis • Sexy • Bold</p>
+      <div class="price">Rp 125.000</div>
+      <div class="btn" onclick="addToCart('FITLAS Rouge',125000)">Tambah ke Keranjang</div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/400x400">
+      <h3>FITLAS Oud</h3>
+      <p>Luxury • Warm • Exclusive</p>
+      <div class="price">Rp 150.000</div>
+      <div class="btn" onclick="addToCart('FITLAS Oud',150000)">Tambah ke Keranjang</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 class="title">Kenapa Belanja di FITLAS?</h2>
+  <div class="features">
+    <div class="feature"><h4>100% Original</h4><p>Produk terpercaya</p></div>
+    <div class="feature"><h4>Marketplace</h4><p>Banyak brand & aroma</p></div>
+    <div class="feature"><h4>Pembayaran Mudah</h4><p>QRIS & Transfer</p></div>
+    <div class="feature"><h4>Pengiriman Cepat</h4><p>Seluruh Indonesia</p></div>
+  </div>
+</section>
+
+<footer>
+  © 2026 FITLAS Perfume Marketplace
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(name + ' berhasil ditambahkan ke keranjang');
+}
+</script>
+
+</body>
+</html>
