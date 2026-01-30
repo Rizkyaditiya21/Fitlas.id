@@ -78,3 +78,17 @@ document.addEventListener("DOMContentLoaded",()=>{
   let total = cart.reduce((s,i)=>s+i.price,0);
   el.innerText = "Total: Rp " + total.toLocaleString();
 });
+function bayar() {
+  const nomor = "6281234567890"; // GANTI nomor WA kamu
+  const pesan = `
+Halo Admin 👋
+
+Saya ingin melakukan pembayaran manual.
+Mohon info cara pembayarannya.
+
+Terima kasih 🙏
+  `;
+
+  const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
+  window.open(link, "_blank");
+}
