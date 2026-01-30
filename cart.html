@@ -196,6 +196,63 @@ window.addEventListener('click', (e)=>{ if(e.target==modal) modal.style.display=
 
 renderCart();
 </script>
+<!-- Modal Payment -->
+<div class="modal" id="payment-modal">
+  <div class="modal-content">
+    <h2>Instruksi Pembayaran</h2>
+
+    <div style="background:#f5f5f5;padding:15px;border-radius:12px;margin-bottom:15px;">
+      <p><strong>Transfer ke:</strong></p>
+      <p>🏦 Bank: <strong>BCA</strong></p>
+      <p>👤 Nama: <strong>RIZKY ADITIYA</strong></p>
+      <p>💳 No Rek: <strong>0990600325</strong></p>
+    </div>
+
+    <p>Total Pembayaran:</p>
+    <h3>Rp <span id="pay-total">0</span></h3>
+
+    <div class="modal-buttons">
+      <button class="confirm" id="btn-done">Saya Sudah Transfer</button>
+      <button class="cancel" id="btn-wa">Chat WhatsApp Admin</button>
+    </div>
+  </div>
+</div>
+<script>
+// Modal payment
+const paymentModal = document.getElementById('payment-modal');
+const payTotal = document.getElementById('pay-total');
+const btnDone = document.getElementById('btn-done');
+const btnWA = document.getElementById('btn-wa');
+
+// Ganti confirm checkout
+btnConfirm.addEventListener('click', ()=>{
+  modal.style.display = 'none';
+
+  let total = 0;
+  cart.forEach(item => total += item.price * item.qty);
+  payTotal.textContent = total.toLocaleString();
+
+  paymentModal.style.display = 'block';
+});
+
+// Sudah transfer
+btnDone.addEventListener('click', ()=>{
+  alert("Terima kasih 🙏\nPesanan kamu sedang diproses.\nAdmin akan menghubungi kamu.");
+  cart = [];
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+  paymentModal.style.display = 'none';
+});
+
+// WhatsApp admin
+btnWA.addEventListener('click', ()=>{
+  let pesan = "Halo admin Fitlas.id, saya sudah melakukan pemesanan.%0A%0ARingkasan:%0A";
+  cart.forEach(item=>{
+    pesan += `${item.name} x${item.qty}%0A`;
+  });
+  window.open(`https://wa.me/6281234567890?text=${pesan}`, '_blank');
+});
+</script>
 
 </body>
 </html>
