@@ -67,23 +67,42 @@ button{
 🔥 PROMO BULAN INI – DISKON BESAR SEMUA PARFUM
 </div>
 
-<div class="products">
+<div class="products" id="productList"></div>
 
 <script>
 const products = [
-["FITLAS Noir",150000,120000,"https://images.unsplash.com/photo-1585386959984-a41552231692"],
-["FITLAS Blanc",130000,110000,"https://images.unsplash.com/photo-1619995745882-f4128ac82ad6"],
-["FITLAS Rouge",160000,125000,"https://images.unsplash.com/photo-1594035910387-fea47794261f"],
-["FITLAS Oud",200000,150000,"https://images.unsplash.com/photo-1615634260167-c8cdede054de"],
-["FITLAS Ocean",140000,110000,"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"],
-["FITLAS Fresh",120000,95000,"https://images.unsplash.com/photo-1523293182086-7651a899d37f"]
+  {name:"FITLAS Noir", old:150000, price:120000, img:"https://images.unsplash.com/photo-1585386959984-a41552231692"},
+  {name:"FITLAS Blanc", old:130000, price:110000, img:"https://images.unsplash.com/photo-1619995745882-f4128ac82ad6"},
+  {name:"FITLAS Rouge", old:160000, price:125000, img:"https://images.unsplash.com/photo-1594035910387-fea47794261f"},
+  {name:"FITLAS Oud", old:200000, price:150000, img:"https://images.unsplash.com/photo-1615634260167-c8cdede054de"},
+  {name:"FITLAS Ocean", old:140000, price:110000, img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f"},
+  {name:"FITLAS Fresh", old:120000, price:95000, img:"https://images.unsplash.com/photo-1523293182086-7651a899d37f"}
 ];
 
+const list = document.getElementById("productList");
+
 products.forEach(p=>{
-document.write(`
-<div class="card">
-<img src="${p[3]}">
-<h4>${p[0]}</h4>
-<div class="old">Rp${p[1]}</div>
-<div class="price">Rp${p[2]}</div>
-<button onclick="addCart('${p[0]}',${p[2]})">Tambah ke Keranjan
+  list.innerHTML += `
+    <div class="card">
+      <img src="${p.img}">
+      <h4>${p.name}</h4>
+      <div class="old">Rp${p.old}</div>
+      <div class="price">Rp${p.price}</div>
+      <button onclick="addCart('${p.name}',${p.price})">
+        Tambah ke Keranjang
+      </button>
+    </div>
+  `;
+});
+
+function addCart(name,price){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push({name,price});
+  localStorage.setItem("cart",JSON.stringify(cart));
+  alert("Produk ditambahkan ke keranjang");
+}
+</script>
+
+</body>
+</html>
+
