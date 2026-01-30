@@ -5,51 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fitlas.id Marketplace</title>
 <style>
-/* Reset & font */
 * { box-sizing: border-box; margin:0; padding:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background: #f5f5f5; }
-
-/* Header */
-header { background: #222; color: #fff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
-header h1 { font-size: 1.8em; }
-header input { padding: 7px 10px; border-radius: 5px; border: none; width: 200px; }
-
-/* Keranjang */
-.cart-link { background: #ff6b6b; padding: 10px 15px; color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background 0.3s; }
-.cart-link:hover { background: #ff4c4c; }
-
-/* Grid produk marketplace */
-.products { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; padding: 20px; }
-.product { background: #fff; border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
-.product:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-.product img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
-.product h3 { margin: 10px 0 5px; font-size: 1.1em; color: #333; }
-.product p { color: #555; font-size: 1em; margin-bottom: 10px; }
-button.add-to-cart { padding: 8px 12px; border: none; background: #1dd1a1; color: #fff; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
-button.add-to-cart:hover { background: #10ac84; }
-
-/* Footer */
-footer { text-align: center; padding: 20px; background: #222; color: #fff; margin-top: 20px; font-size: 0.9em; }
+body { background:#f5f5f5; }
+header { background:#222; color:#fff; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+header h1 { font-size:1.8em; margin-bottom:5px; }
+header input { padding:7px 10px; border-radius:5px; border:none; width:200px; margin-right:10px; }
+.cart-link { background:#ff6b6b; padding:10px 15px; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; transition: background 0.3s; margin-top:5px; }
+.cart-link:hover { background:#ff4c4c; }
+.products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:25px; padding:20px; }
+.product { background:#fff; border-radius:12px; padding:15px; text-align:center; box-shadow:0 3px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+.product:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
+.product img { width:100%; border-radius:10px; margin-bottom:10px; }
+.product h3 { margin:10px 0 5px; font-size:1.1em; color:#333; }
+.product p { color:#555; font-size:1em; margin-bottom:10px; }
+button.add-to-cart { padding:8px 12px; border:none; background:#1dd1a1; color:#fff; font-weight:bold; border-radius:6px; cursor:pointer; transition: background 0.3s; }
+button.add-to-cart:hover { background:#10ac84; }
+footer { text-align:center; padding:20px; background:#222; color:#fff; margin-top:20px; font-size:0.9em; }
+@media(max-width:600px){ header { flex-direction:column; align-items:flex-start; } header input{width:100%; margin:10px 0;} }
 </style>
 </head>
 <body>
 
 <header>
   <h1>FITLAS.ID</h1>
-  <input type="text" id="search" placeholder="Cari parfum...">
-  <a href="cart.html" class="cart-link">Keranjang (<span id="cart-count">0</span>)</a>
+  <div>
+    <input type="text" id="search" placeholder="Cari parfum...">
+    <a href="cart.html" class="cart-link">Keranjang (<span id="cart-count">0</span>)</a>
+  </div>
 </header>
 
-<div class="products" id="products">
-  <!-- Produk akan di-render oleh JavaScript -->
-</div>
+<div class="products" id="products"></div>
 
 <footer>
   &copy; 2026 Fitlas.id Marketplace. All rights reserved.
 </footer>
 
 <script>
-// Data produk (placeholder)
+// Data produk
 const productsData = [
   {name:"FITLAS Noir", price:250000, img:"https://via.placeholder.com/200x200?text=Noir"},
   {name:"FITLAS Blanc", price:200000, img:"https://via.placeholder.com/200x200?text=Blanc"},
@@ -60,37 +52,39 @@ const productsData = [
 
 // Render produk
 const productsContainer = document.getElementById('products');
-productsContainer.innerHTML = productsData.map((p, i) => `
-  <div class="product" data-index="${i}">
-    <img src="${p.img}" alt="${p.name}">
-    <h3>${p.name}</h3>
-    <p>Rp ${p.price.toLocaleString()}</p>
-    <button class="add-to-cart">Tambah ke Keranjang</button>
-  </div>
-`).join('');
+function renderProducts() {
+  productsContainer.innerHTML = productsData.map((p,i)=>`
+    <div class="product" data-index="${i}">
+      <img src="${p.img}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>Rp ${p.price.toLocaleString()}</p>
+      <button class="add-to-cart">Tambah ke Keranjang</button>
+    </div>
+  `).join('');
+}
+renderProducts();
 
 // Cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-function updateCartCount() {
-  document.getElementById('cart-count').textContent = cart.reduce((sum,item)=>sum+item.qty,0);
-}
+function updateCartCount(){ document.getElementById('cart-count').textContent = cart.reduce((sum,item)=>sum+item.qty,0); }
 updateCartCount();
 
-// Tambah ke keranjang
-document.querySelectorAll('.add-to-cart').forEach((btn, i) => {
-  btn.addEventListener('click', () => {
-    const product = productsData[i];
-    const existing = cart.find(item => item.name === product.name);
-    if(existing) existing.qty += 1;
+// Tambah ke cart
+document.addEventListener('click', e=>{
+  if(e.target.classList.contains('add-to-cart')){
+    const index = e.target.parentElement.dataset.index;
+    const product = productsData[index];
+    const existing = cart.find(item=>item.name===product.name);
+    if(existing) existing.qty+=1;
     else cart.push({name:product.name, price:product.price, qty:1});
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     alert(product.name + " berhasil ditambahkan ke keranjang!");
-  });
+  }
 });
 
-// Search sederhana
-document.getElementById('search').addEventListener('input', (e)=>{
+// Search
+document.getElementById('search').addEventListener('input', e=>{
   const value = e.target.value.toLowerCase();
   document.querySelectorAll('.product').forEach(p=>{
     const name = p.querySelector('h3').textContent.toLowerCase();
@@ -101,4 +95,3 @@ document.getElementById('search').addEventListener('input', (e)=>{
 
 </body>
 </html>
-
