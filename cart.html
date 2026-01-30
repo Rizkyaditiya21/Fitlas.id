@@ -2,256 +2,71 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<title>Keranjang – FITLAS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Keranjang Premium - Fitlas.id</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body { font-family:'Montserrat',sans-serif; background:linear-gradient(to bottom,#f5f5f5,#e0e0e0); margin:0; padding:0; }
-header { background:#1a1a1a; color:#fff; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000; }
-header a { color:#ff6b6b; text-decoration:none; font-weight:700; transition:all 0.3s; }
-header a:hover { color:#ff4757; transform:scale(1.05); }
-.cart-container { padding:30px; max-width:950px; margin:auto; }
-.cart-table { width:100%; border-collapse: collapse; background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,0.15); }
-.cart-table th, .cart-table td { padding:18px; text-align:left; vertical-align:middle; }
-.cart-table th { background:#eee; font-weight:700; }
-.cart-table img { width:70px; border-radius:12px; margin-right:10px; vertical-align:middle; transition: transform 0.3s; }
-.cart-table img:hover { transform:scale(1.1); }
-.qty-controls { display:flex; align-items:center; gap:5px; }
-.qty-controls button { padding:5px 10px; border:none; background:#1dd1a1; color:#fff; border-radius:8px; cursor:pointer; font-weight:600; transition:all 0.3s; }
-.qty-controls button:hover { background:#10ac84; transform:scale(1.1); }
-.cart-table td button.delete { background:red; border-radius:8px; padding:6px 12px; font-weight:600; transition:all 0.3s; }
-.cart-table td button.delete:hover { background:#c0392b; transform:scale(1.05); }
-.cart-total { margin-top:25px; text-align:right; font-size:1.3em; font-weight:700; }
-.checkout-btn { margin-top:15px; padding:12px 25px; background:#1dd1a1; color:#fff; border:none; border-radius:12px; cursor:pointer; font-size:1.1em; float:right; font-weight:700; transition:all 0.3s; }
-.checkout-btn:hover { background:#10ac84; transform:scale(1.05); }
-footer { text-align:center; padding:25px; background:#1a1a1a; color:#fff; margin-top:40px; font-size:0.9em; }
-
-/* Modal */
-.modal { display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.5); backdrop-filter:blur(3px); }
-.modal-content { background:#fff; margin:10% auto; padding:30px; border-radius:20px; max-width:500px; box-shadow:0 10px 30px rgba(0,0,0,0.2); animation:fadeIn 0.3s; }
-.modal-content h2 { margin-bottom:20px; font-size:1.5em; font-weight:700; color:#333; }
-.modal-content ul { list-style:none; margin-bottom:20px; max-height:300px; overflow-y:auto; }
-.modal-content ul li { padding:8px 0; border-bottom:1px solid #eee; display:flex; justify-content:space-between; }
-.modal-buttons { text-align:right; }
-.modal-buttons button { padding:10px 18px; margin-left:10px; border:none; border-radius:10px; font-weight:700; cursor:pointer; transition:all 0.3s; }
-.modal-buttons .confirm { background:#1dd1a1; color:#fff; }
-.modal-buttons .confirm:hover { background:#10ac84; transform:scale(1.05); }
-.modal-buttons .cancel { background:red; color:#fff; }
-.modal-buttons .cancel:hover { background:#c0392b; transform:scale(1.05); }
-
-@keyframes fadeIn { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
-@media(max-width:600px){ .cart-table th,.cart-table td{font-size:0.9em; padding:12px;} .modal-content{margin:20% auto; padding:20px;}}
+body{font-family:Arial;background:#f5f5f5;margin:0}
+header{background:#ee4d2d;color:white;padding:15px}
+.container{padding:20px}
+.item{
+  background:white;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+}
+.total{font-size:20px;color:#ee4d2d}
+input,button{padding:8px;margin-top:10px}
+button{background:#ee4d2d;color:white;border:none;border-radius:6px}
 </style>
 </head>
+
 <body>
 
 <header>
-  <span style="font-weight:700;font-size:1.3em;">Keranjang Belanja</span>
-  <a href="index.html">⬅️ Kembali Belanja</a>
+  <b>Keranjang</b> | <a href="index.html" style="color:white">Kembali</a>
 </header>
 
-<div class="cart-container">
-  <table class="cart-table" id="cart-table">
-    <thead>
-      <tr>
-        <th>Produk</th>
-        <th>Harga</th>
-        <th>Jumlah</th>
-        <th>Subtotal</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
-    <tbody id="cart-body"></tbody>
-  </table>
-  <div class="cart-total">
-    Total: Rp <span id="total">0</span>
-  </div>
-  <button class="checkout-btn" id="checkout-btn">Checkout</button>
-</div>
+<div class="container" id="list"></div>
 
-<!-- Modal -->
-<div class="modal" id="checkout-modal">
-  <div class="modal-content">
-    <h2>Ringkasan Pembelian</h2>
-    <ul id="checkout-list"></ul>
-    <div class="modal-total" style="text-align:right; font-weight:700; margin-bottom:15px;">Total: Rp <span id="modal-total">0</span></div>
-    <div class="modal-buttons">
-      <button class="cancel" id="modal-cancel">Batal</button>
-      <button class="confirm" id="modal-confirm">Bayar</button>
-    </div>
-  </div>
+<div class="container">
+  <input id="voucher" placeholder="Kode Voucher (FITLAS10)">
+  <button onclick="apply()">Pakai Voucher</button>
+  <p class="total" id="total"></p>
+  <button onclick="checkout()">Checkout</button>
 </div>
-
-<footer>
-  &copy; 2026 Fitlas.id Premium Marketplace. All rights reserved.
-</footer>
 
 <script>
-// Ambil cart
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+let total=0;
+let disc=0;
 
-// Render cart premium
-function renderCart(){
-  const cartBody = document.getElementById('cart-body');
-  cartBody.innerHTML='';
-  let total=0;
-  if(cart.length===0){
-    cartBody.innerHTML='<tr><td colspan="5" style="text-align:center;">Keranjang kosong</td></tr>';
-    document.getElementById('total').textContent='0';
-    return;
+cart.forEach(i=>{
+  total+=i.price;
+  document.getElementById("list").innerHTML+=
+  `<div class="item"><span>${i.name}</span><span>Rp${i.price}</span></div>`;
+});
+
+function apply(){
+  if(voucher.value==="FITLAS10"){
+    disc=0.1;
+    alert("Voucher dipakai!");
+    show();
   }
-
-  cart.forEach((item,index)=>{
-    const subtotal = item.price*item.qty;
-    total+=subtotal;
-    const row = document.createElement('tr');
-    row.innerHTML=`
-      <td><img src="${item.img}" alt="${item.name}"> ${item.name}</td>
-      <td>Rp ${item.price.toLocaleString()}</td>
-      <td>
-        <div class="qty-controls">
-          <button class="minus" data-index="${index}">−</button>
-          <span>${item.qty}</span>
-          <button class="plus" data-index="${index}">+</button>
-        </div>
-      </td>
-      <td>Rp ${(subtotal).toLocaleString()}</td>
-      <td><button class="delete" data-index="${index}">Hapus</button></td>
-    `;
-    cartBody.appendChild(row);
-  });
-
-  document.getElementById('total').textContent=total.toLocaleString();
-
-  // Hapus item
-  document.querySelectorAll('.delete').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const i = btn.dataset.index;
-      cart.splice(i,1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    });
-  });
-
-  // Plus / minus
-  document.querySelectorAll('.plus').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const i = btn.dataset.index;
-      cart[i].qty += 1;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    });
-  });
-  document.querySelectorAll('.minus').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const i = btn.dataset.index;
-      if(cart[i].qty>1) cart[i].qty -=1;
-      else if(confirm('Hapus produk dari keranjang?')) cart.splice(i,1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      renderCart();
-    });
-  });
 }
 
-// Modal checkout
-const modal = document.getElementById('checkout-modal');
-const list = document.getElementById('checkout-list');
-const modalTotal = document.getElementById('modal-total');
-const btnCheckout = document.getElementById('checkout-btn');
-const btnCancel = document.getElementById('modal-cancel');
-const btnConfirm = document.getElementById('modal-confirm');
+function show(){
+  let t=total-(total*disc);
+  document.getElementById("total").innerText="Total: Rp"+t;
+  localStorage.setItem("pay",t);
+}
+show();
 
-btnCheckout.addEventListener('click', ()=>{
-  if(cart.length===0){ alert('Keranjang kosong!'); return; }
-  list.innerHTML='';
-  let total=0;
-  cart.forEach(item=>{
-    const subtotal = item.price*item.qty;
-    total+=subtotal;
-    const li = document.createElement('li');
-    li.textContent = `${item.name} x${item.qty}`;
-    const span = document.createElement('span');
-    span.textContent = `Rp ${subtotal.toLocaleString()}`;
-    li.appendChild(span);
-    list.appendChild(li);
-  });
-  modalTotal.textContent=total.toLocaleString();
-  modal.style.display='block';
-});
-
-// Cancel modal
-btnCancel.addEventListener('click', ()=>{ modal.style.display='none'; });
-
-// Confirm payment
-btnConfirm.addEventListener('click', ()=>{
-  alert('Pembayaran berhasil!\nTerima kasih telah berbelanja di Fitlas.id');
-  cart=[];
-  localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
-  modal.style.display='none';
-});
-
-// Tutup modal klik di luar
-window.addEventListener('click', (e)=>{ if(e.target==modal) modal.style.display='none'; });
-
-renderCart();
-</script>
-<!-- Modal Payment -->
-<div class="modal" id="payment-modal">
-  <div class="modal-content">
-    <h2>Instruksi Pembayaran</h2>
-
-    <div style="background:#f5f5f5;padding:15px;border-radius:12px;margin-bottom:15px;">
-      <p><strong>Transfer ke:</strong></p>
-      <p>🏦 Bank: <strong>BCA</strong></p>
-      <p>👤 Nama: <strong>RIZKY ADITIYA</strong></p>
-      <p>💳 No Rek: <strong>0990600325</strong></p>
-    </div>
-
-    <p>Total Pembayaran:</p>
-    <h3>Rp <span id="pay-total">0</span></h3>
-
-    <div class="modal-buttons">
-      <button class="confirm" id="btn-done">Saya Sudah Transfer</button>
-      <button class="cancel" id="btn-wa">Chat WhatsApp Admin</button>
-    </div>
-  </div>
-</div>
-<script>
-// Modal payment
-const paymentModal = document.getElementById('payment-modal');
-const payTotal = document.getElementById('pay-total');
-const btnDone = document.getElementById('btn-done');
-const btnWA = document.getElementById('btn-wa');
-
-// Ganti confirm checkout
-btnConfirm.addEventListener('click', ()=>{
-  modal.style.display = 'none';
-
-  let total = 0;
-  cart.forEach(item => total += item.price * item.qty);
-  payTotal.textContent = total.toLocaleString();
-
-  paymentModal.style.display = 'block';
-});
-
-// Sudah transfer
-btnDone.addEventListener('click', ()=>{
-  alert("Terima kasih 🙏\nPesanan kamu sedang diproses.\nAdmin akan menghubungi kamu.");
-  cart = [];
-  localStorage.setItem('cart', JSON.stringify(cart));
-  renderCart();
-  paymentModal.style.display = 'none';
-});
-
-// WhatsApp admin
-btnWA.addEventListener('click', ()=>{
-  let pesan = "Halo admin Fitlas.id, saya sudah melakukan pemesanan.%0A%0ARingkasan:%0A";
-  cart.forEach(item=>{
-    pesan += `${item.name} x${item.qty}%0A`;
-  });
-  window.open(`https://wa.me/62882000111956?text=${pesan}`, '_blank');
-});
+function checkout(){
+  location.href="checkout.html";
+}
 </script>
 
 </body>
