@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Checkout</title>
+<title>Pembayaran – FITLAS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -14,37 +14,77 @@ body{
 }
 .box{
   background:rgba(255,255,255,0.1);
-  padding:20px;
-  border-radius:12px;
+  padding:25px;
+  border-radius:14px;
+  max-width:400px;
+  margin:auto;
 }
-.total{font-size:26px;color:#facc15}
+.total{
+  font-size:26px;
+  color:#facc15;
+  font-weight:bold;
+}
+button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#22c55e;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+}
+.note{
+  opacity:.8;
+  font-size:14px;
+  margin-top:10px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="box">
-<h2>Pembayaran</h2>
+  <h2>Checkout & Pembayaran</h2>
 
-<p>Total yang harus dibayar:</p>
-<div class="total">Rp<span id="total"></span></div>
+  <p>Total yang harus dibayar:</p>
+  <div class="total">Rp<span id="total"></span></div>
 
-<hr>
+  <hr>
 
-<p>Transfer ke:</p>
-<b>Bank BCA</b><br>
-No Rek: <b>1234567890</b><br>
-a.n <b>NAMA KAMU</b>
+  <p>Silakan transfer ke rekening:</p>
+  <b>Bank BCA</b><br>
+  No Rek: <b>1234567890</b><br>
+  a.n <b>NAMA KAMU</b>
 
-<p style="opacity:.7;margin-top:15px">
-Setelah transfer, pesanan akan diproses.
-</p>
+  <p class="note">
+    Setelah transfer, klik tombol di bawah untuk konfirmasi.
+  </p>
+
+  <button onclick="confirmPayment()">
+    Saya Sudah Transfer
+  </button>
 </div>
 
 <script>
-document.getElementById("total").innerText =
-localStorage.getItem("pay") || 0;
+const total = localStorage.getItem("pay") || 0;
+document.getElementById("total").innerText = total;
+
+function confirmPayment(){
+  // hapus keranjang
+  localStorage.removeItem("cart");
+  localStorage.removeItem("pay");
+
+  // ganti nomor WA kamu
+  const phone = "6281234567890";
+  const msg = `Halo FITLAS,%0ASaya sudah transfer sebesar Rp${total}.%0ATerima kasih.`;
+
+  window.location.href =
+    `https://wa.me/${phone}?text=${msg}`;
+}
 </script>
 
 </body>
 </html>
+
