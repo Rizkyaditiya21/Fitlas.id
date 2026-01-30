@@ -78,9 +78,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   let total = cart.reduce((s,i)=>s+i.price,0);
   el.innerText = "Total: Rp " + total.toLocaleString();
 });
+// Fungsi bayar manual via WhatsApp
 function bayar() {
-  const nomor = "62882000111956"; //  `
-Halo Admin 👋
+  const nomor = "62882000111956"; // Ganti nomor WA kamu
+  const pesan = `
+Halo Admin FITLAS 👋
 
 Saya ingin melakukan pembayaran manual.
 Mohon info cara pembayarannya.
@@ -91,10 +93,13 @@ Terima kasih 🙏
   const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
   window.open(link, "_blank");
 }
-function bayar() {
-  const nomor = "62882000111956"; // GANTI ke nomor WA kamu
-  const pesan = "Halo admin, saya mau melakukan pembayaran manual.";
 
-  const link = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(pesan);
-  window.open(link, "_blank");
+// Hubungkan tombol Checkout dengan fungsi bayar
+document.addEventListener("DOMContentLoaded", function() {
+  const tombol = document.getElementById("checkoutBtn");
+  if (tombol) {
+    tombol.addEventListener("click", bayar);
+  }
+});
+
 }
