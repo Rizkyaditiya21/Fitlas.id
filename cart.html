@@ -2,70 +2,34 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Keranjang</title>
+<title>Keranjang – FITLAS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#020617,#0f172a);
-  color:white;
-}
-header{background:#ee4d2d;padding:15px}
+body{font-family:Arial;background:#020617;color:white;padding:20px}
 .item{
-  background:rgba(255,255,255,0.1);
-  margin:10px;
-  padding:10px;
+  background:#111827;
+  padding:12px;
+  margin-bottom:10px;
   border-radius:10px;
   display:flex;
   justify-content:space-between;
 }
-.total{padding:15px;font-size:20px;color:#facc15}
+.total{font-size:22px;color:#facc15;margin:15px 0}
 button{
-  width:calc(100% - 20px);
-  margin:10px;
-  padding:10px;
-  background:#facc15;
+  width:100%;
+  padding:12px;
+  background:#22c55e;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<b>Keranjang Belanja</b>
-</header>
-
-<div id="list"></div>
+<h2>Keranjang Belanja</h2>
+<div id="items"></div>
 <div class="total" id="total"></div>
-<button onclick="checkout()">Checkout</button>
 
-<script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let list = document.getElementById("list");
-let total = 0;
-
-cart.forEach(item=>{
-  total += item.price;
-  list.innerHTML += `
-  <div class="item">
-    <span>${item.name}</span>
-    <span>Rp${item.price}</span>
-  </div>
-  `;
-});
-
-document.getElementById("total").innerText =
-  "Total Bayar: Rp" + total;
-
-function checkout(){
-  localStorage.setItem("pay", total);
-  location.href="checkout.html";
-}
-</script>
-
-</body>
-</html>
+<button onclick="c
