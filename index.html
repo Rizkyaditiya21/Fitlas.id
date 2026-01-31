@@ -2,67 +2,170 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>FITLAS Marketplace</title>
+<title>FITLAS Perfume Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Arial;background:#f5f5f5}
-header{background:#ee4d2d;color:white;padding:15px}
-header a{color:white;margin-left:15px;text-decoration:none}
-.banner{background:#ffe4e1;color:#ee4d2d;padding:15px;text-align:center;font-weight:bold}
-.products{display:grid;grid-template-columns:repeat(auto-fit,200px);gap:15px;padding:20px}
-.card{background:white;border-radius:8px;padding:10px}
-.card img{width:100%;height:150px;object-fit:cover;border-radius:6px}
-.old{text-decoration:line-through;color:gray;font-size:13px}
-.price{color:#ee4d2d;font-weight:bold}
-button{background:#ee4d2d;color:white;border:none;padding:8px;width:100%;border-radius:5px;cursor:pointer}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,#020617,#1e293b);
+  color:#fff;
+}
+header{
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header h1{margin:0;letter-spacing:3px}
+.cart-link{
+  background:#fff;
+  color:#020617;
+  padding:10px 18px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+}
+.hero{
+  text-align:center;
+  padding:60px 20px;
+}
+.hero h2{font-size:36px;margin-bottom:10px}
+.hero p{opacity:.85}
+
+.products{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:#fff;
+  color:#020617;
+  border-radius:20px;
+  padding:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+.card img{
+  width:100%;
+  border-radius:15px;
+}
+.card h3{margin:10px 0 5px}
+.card p{font-size:13px;opacity:.8}
+.price{font-weight:bold;margin:8px 0}
+button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:30px;
+  background:#020617;
+  color:#fff;
+  cursor:pointer;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  font-size:14px;
+  opacity:.7;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<b>FITLAS</b>
-<a href="cart.html">Keranjang 🛒</a>
+<h1>FITLAS</h1>
+<a class="cart-link" href="cart.html">🛒 Keranjang</a>
 </header>
 
-<div class="banner">
-🔥 PROMO BESAR! DISKON 20% SEMUA PRODUK
+<section class="hero">
+<h2>Marketplace Parfum Premium</h2>
+<p>Fresh • Sweet • Woody • Luxury</p>
+</section>
+
+<section class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de">
+<h3>FITLAS Noir</h3>
+<p>Maskulin • Elegan</p>
+<div class="price">Rp 120.000</div>
+<button onclick="addToCart('FITLAS Noir',120000,'https://images.unsplash.com/photo-1615634260167-c8cdede054de')">
+Tambah ke Keranjang
+</button>
 </div>
 
-<div class="products">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1594035910387-fea47794261f">
+<h3>FITLAS Blanc</h3>
+<p>Fresh • Clean</p>
+<div class="price">Rp 110.000</div>
+<button onclick="addToCart('FITLAS Blanc',110000,'https://images.unsplash.com/photo-1594035910387-fea47794261f')">
+Tambah ke Keranjang
+</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585386959984-a41552231693">
+<h3>FITLAS Rouge</h3>
+<p>Sweet • Sexy</p>
+<div class="price">Rp 125.000</div>
+<button onclick="addToCart('FITLAS Rouge',125000,'https://images.unsplash.com/photo-1585386959984-a41552231693')">
+Tambah ke Keranjang
+</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
+<h3>FITLAS Oud</h3>
+<p>Luxury • Warm</p>
+<div class="price">Rp 150.000</div>
+<button onclick="addToCart('FITLAS Oud',150000,'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519')">
+Tambah ke Keranjang
+</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539">
+<h3>FITLAS Fresh</h3>
+<p>Daily • Sporty</p>
+<div class="price">Rp 105.000</div>
+<button onclick="addToCart('FITLAS Fresh',105000,'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539')">
+Tambah ke Keranjang
+</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1619994403073-2cec844b8e63">
+<h3>FITLAS Vanilla</h3>
+<p>Manis • Soft</p>
+<div class="price">Rp 115.000</div>
+<button onclick="addToCart('FITLAS Vanilla',115000,'https://images.unsplash.com/photo-1619994403073-2cec844b8e63')">
+Tambah ke Keranjang
+</button>
+</div>
+
+</section>
+
+<footer>
+© 2026 FITLAS Perfume Marketplace
+</footer>
 
 <script>
-const products = [
-  ["FITLAS Noir",150000,120000],
-  ["FITLAS Blanc",130000,110000],
-  ["FITLAS Rouge",160000,125000],
-  ["FITLAS Oud",200000,150000],
-  ["FITLAS Fresh",120000,95000],
-  ["FITLAS Ocean",140000,110000]
-];
-
-products.forEach(p=>{
-  document.write(`
-  <div class="card">
-    <img src="https://images.unsplash.com/photo-1585386959984-a41552231692">
-    <h4>${p[0]}</h4>
-    <div class="old">Rp${p[1]}</div>
-    <div class="price">Rp${p[2]}</div>
-    <button onclick="addCart('${p[0]}',${p[2]})">Tambah</button>
-  </div>
-  `);
-});
-
-function addCart(name,price){
+function addToCart(name, price, image){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({name,price});
-  localStorage.setItem("cart",JSON.stringify(cart));
+  cart.push({name, price, image});
+  localStorage.setItem("cart", JSON.stringify(cart));
   alert("Produk masuk keranjang");
 }
 </script>
 
-</div>
-
 </body>
 </html>
+
