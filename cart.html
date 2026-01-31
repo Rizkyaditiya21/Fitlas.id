@@ -2,34 +2,103 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Keranjang – FITLAS</title>
+<title>Keranjang - FITLAS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{font-family:Arial;background:#020617;color:white;padding:20px}
-.item{
-  background:#111827;
-  padding:12px;
-  margin-bottom:10px;
-  border-radius:10px;
-  display:flex;
-  justify-content:space-between;
+body{
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
+  margin:0;
+  padding:20px;
 }
-.total{font-size:22px;color:#facc15;margin:15px 0}
+h1{text-align:center}
+.item{
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  display:flex;
+  gap:15px;
+  margin-bottom:15px;
+}
+.item img{
+  width:80px;
+  border-radius:10px;
+}
+.total{
+  font-weight:bold;
+  font-size:18px;
+  margin:20px 0;
+}
 button{
   width:100%;
-  padding:12px;
-  background:#22c55e;
+  padding:14px;
+  background:#111;
+  color:#fff;
   border:none;
-  border-radius:10px;
-  font-weight:bold;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+.empty{
+  text-align:center;
+  opacity:.7;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Keranjang Belanja</h2>
-<div id="items"></div>
+<h1>🛒 Keranjang Belanja</h1>
+
+<div id="cart-items"></div>
 <div class="total" id="total"></div>
 
-<button onclick="c
+<button onclick="checkout()">Checkout via WhatsApp</button>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let container = document.getElementById("cart-items");
+let total = 0;
+let message = "Halo admin FITLAS,%0A%0ASaya mau order:%0A";
+
+if(cart.length === 0){
+  container.innerHTML = "<p class='empty'>Keranjang masih kosong</p>";
+}else{
+  cart.forEach(item=>{
+    total += item.price;
+    container.innerHTML += `
+      <div class="item">
+        <img src="${item.image}">
+        <div>
+          <strong>${item.name}</strong><br>
+          Rp ${item.price.toLocaleString()}
+        </div>
+      </div>
+    `;
+    message += `- ${item.name} : Rp ${item.price.toLocaleString()}%0A`;
+  });
+}
+
+document.getElementById("total").innerText =
+  "Total: Rp " + total.toLocaleString();
+
+function checkout(){
+  if(cart.length === 0){
+    alert("Keranjang masih kosong");
+    return;
+  }
+
+  message += `%0A*Total: Rp ${total.toLocaleString()}*%0A%0A`;
+  message += `Pembayaran:%0A`;
+  message += `Transfer BCA 0990600325 a/n RIZKY ADITIYA%0A`;
+  message += `atau QRIS (kirim bukti)%0A%0A`;
+  message += `Alamat pengiriman:%0A`;
+
+  let wa = "62882000111956"; // GANTI DENGAN NO WA KAMU
+  window.open(`https://wa.me/${wa}?text=${message}`);
+}
+</script>
+
+</body>
+</html>
