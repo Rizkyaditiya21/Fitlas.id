@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Pembayaran – FITLAS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran - FITLAS</title>
 <style>
-body{font-family:Arial;background:#020617;color:white;padding:20px}
+body{
+  background:#020617;
+  color:#fff;
+  font-family:Arial;
+  padding:20px;
+}
 .box{
-  max-width:420px;
+  max-width:500px;
   margin:auto;
   background:#111827;
-  padding:25px;
-  border-radius:16px;
+  padding:20px;
+  border-radius:10px;
 }
-.total{font-size:26px;color:#facc15;margin:10px 0}
+h2{text-align:center}
+.bank{
+  background:#1e293b;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
 button{
   width:100%;
   padding:12px;
-  background:#22c55e;
+  background:#25D366;
   border:none;
-  border-radius:10px;
-  font-weight:bold;
-  margin-top:15px;
+  border-radius:8px;
+  color:#fff;
+  font-size:16px;
 }
 </style>
 </head>
@@ -29,18 +38,29 @@ button{
 <body>
 
 <div class="box">
-<h2>Checkout & Pembayaran</h2>
+<h2>💳 Pembayaran FITLAS</h2>
 
-<p>Total yang harus dibayar:</p>
-<div class="total">Rp<span id="total"></span></div>
+<div class="bank">
+<b>BCA</b><br>
+0990600325<br>
+a.n RIZKY ADITIYA FERNANDO
+</div>
 
-<hr>
+<div class="bank">
+<b>MANDIRI</b><br>
+0987654321<br>
+a.n RIZKY ADITIYA FERNANDO
+</div>
 
-<p><b>Transfer ke rekening:</b></p>
-<p>
-Bank BCA<br>
-No Rek: <b>0990600325</b><br>
-a.n <b>RIZKY ADITIYA FERNANDO</b>
-</p>
+<div class="bank">
+<b>QRIS</b><br>
+<img src="qris.png" width="100%">
+</div>
 
-<p style="opa
+<button onclick="window.location.href='https://wa.me/62882000111956'">
+Konfirmasi via WhatsApp
+</button>
+</div>
+
+</body>
+</html>
