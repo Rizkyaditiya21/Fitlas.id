@@ -2,65 +2,105 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>FITLAS Perfume Store</title>
+<title>FITLAS – Perfume Marketplace</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#020617,#1e293b);
+  font-family:Poppins,Arial,sans-serif;
+  background:#0b1220;
   color:#fff;
 }
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
 header{
-  padding:20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:20px 40px;
+  background:rgba(0,0,0,.4);
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(10px);
 }
-header h1{margin:0;letter-spacing:3px}
-.cart-link{
+header h1{letter-spacing:4px;margin:0}
+.cart{
   background:#fff;
   color:#020617;
-  padding:10px 18px;
+  padding:10px 20px;
   border-radius:30px;
-  text-decoration:none;
   font-weight:bold;
 }
+
+/* HERO */
 .hero{
   text-align:center;
-  padding:60px 20px;
+  padding:90px 20px;
+  background:linear-gradient(135deg,#020617,#1e293b);
 }
-.hero h2{font-size:36px;margin-bottom:10px}
+.hero h2{font-size:42px;margin-bottom:10px}
 .hero p{opacity:.85}
+.hero a{
+  display:inline-block;
+  margin-top:25px;
+  background:#fff;
+  color:#020617;
+  padding:14px 40px;
+  border-radius:40px;
+  font-weight:bold;
+}
 
-.products{
+/* SECTION */
+section{
   max-width:1200px;
   margin:auto;
-  padding:40px 20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
+  padding:70px 20px;
+}
+.title{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:50px;
 }
 
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:30px;
+}
 .card{
   background:#fff;
   color:#020617;
-  border-radius:20px;
-  padding:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  border-radius:22px;
+  padding:16px;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+  transition:.3s;
+  position:relative;
 }
+.card:hover{transform:translateY(-8px)}
 .card img{
   width:100%;
-  border-radius:15px;
+  border-radius:16px;
 }
-.card h3{margin:10px 0 5px}
-.card p{font-size:13px;opacity:.8}
-.price{font-weight:bold;margin:8px 0}
-button{
+.badge{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:#020617;
+  color:#fff;
+  padding:6px 12px;
+  font-size:12px;
+  border-radius:20px;
+}
+.card h3{margin:12px 0 6px}
+.card p{font-size:13px;opacity:.75}
+.price{font-weight:700;margin:10px 0}
+.card button{
   width:100%;
-  padding:10px;
+  padding:12px;
   border:none;
   border-radius:30px;
   background:#020617;
@@ -68,11 +108,26 @@ button{
   cursor:pointer;
 }
 
+/* TESTI */
+.testi{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.testi div{
+  background:#fff;
+  color:#020617;
+  padding:25px;
+  border-radius:20px;
+}
+
+/* FOOTER */
 footer{
+  background:#020617;
   text-align:center;
-  padding:30px;
+  padding:40px 20px;
   font-size:14px;
-  opacity:.7;
+  color:#94a3b8;
 }
 </style>
 </head>
@@ -81,17 +136,22 @@ footer{
 
 <header>
 <h1>FITLAS</h1>
-<a class="cart-link" href="cart.html">🛒 Keranjang</a>
+<a class="cart" href="cart.html">🛒 Keranjang</a>
 </header>
 
 <section class="hero">
-<h2>Marketplace Parfum Premium</h2>
-<p>Fresh • Sweet • Woody • Luxury</p>
+<h2>Premium Perfume Marketplace</h2>
+<p>Aroma elegan • Tahan lama • Kirim seluruh Indonesia</p>
+<a href="#produk">Belanja Sekarang</a>
 </section>
 
-<section class="products">
+<section id="produk">
+<h2 class="title">Produk Unggulan</h2>
+
+<div class="products">
 
 <div class="card">
+<span class="badge">🔥 Best Seller</span>
 <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de">
 <h3>FITLAS Noir</h3>
 <p>Maskulin • Elegan</p>
@@ -102,6 +162,7 @@ Tambah ke Keranjang
 </div>
 
 <div class="card">
+<span class="badge">🆕 New</span>
 <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f">
 <h3>FITLAS Blanc</h3>
 <p>Fresh • Clean</p>
@@ -122,6 +183,7 @@ Tambah ke Keranjang
 </div>
 
 <div class="card">
+<span class="badge">⭐ Favorit</span>
 <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
 <h3>FITLAS Oud</h3>
 <p>Luxury • Warm</p>
@@ -131,31 +193,33 @@ Tambah ke Keranjang
 </button>
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539">
-<h3>FITLAS Fresh</h3>
-<p>Daily • Sporty</p>
-<div class="price">Rp 105.000</div>
-<button onclick="addToCart('FITLAS Fresh',105000,'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539')">
-Tambah ke Keranjang
-</button>
 </div>
+</section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1619994403073-2cec844b8e63">
-<h3>FITLAS Vanilla</h3>
-<p>Manis • Soft</p>
-<div class="price">Rp 115.000</div>
-<button onclick="addToCart('FITLAS Vanilla',115000,'https://images.unsplash.com/photo-1619994403073-2cec844b8e63')">
-Tambah ke Keranjang
-</button>
+<section>
+<h2 class="title">Apa Kata Customer</h2>
+<div class="testi">
+<div>⭐⭐⭐⭐⭐<br>“Aromanya tahan lama & elegan”<br><b>— Andi, Jakarta</b></div>
+<div>⭐⭐⭐⭐⭐<br>“Packing rapi, respon cepat”<br><b>— Rina, Bandung</b></div>
+<div>⭐⭐⭐⭐⭐<br>“Wanginya beda dari yang lain”<br><b>— Fajar, Surabaya</b></div>
 </div>
-
 </section>
 
 <footer>
-© 2026 FITLAS Perfume Marketplace
+  <div style="margin-bottom:15px;">
+    <a href="https://instagram.com/artaadityaa.f" target="_blank" style="margin:0 10px;">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="28">
+    </a>
+
+    <a href="https://wa.me/62882000111956" target="_blank" style="margin:0 10px;">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="28">
+    </a>
+  </div>
+
+  © 2026 FITLAS Perfume Marketplace<br>
+  📍 Indonesia
 </footer>
+
 
 <script>
 function addToCart(name, price, image){
@@ -165,7 +229,19 @@ function addToCart(name, price, image){
   alert("Produk masuk keranjang");
 }
 </script>
+<a href="https://wa.me/62882000111956" target="_blank"
+style="
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+box-shadow:0 10px 25px rgba(0,0,0,.4);
+z-index:999;
+">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="32">
+</a>
 
 </body>
 </html>
-
