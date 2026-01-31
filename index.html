@@ -303,7 +303,27 @@ z-index:999;
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="32">
 </a>
 
+  <script>
+const discount = 0.2; // 20% diskon
+const flashSale = true;
+
+function addToCart(name, price){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let finalPrice = flashSale ? price - (price * discount) : price;
+
+  cart.push({
+    name:name,
+    price:finalPrice
+  });
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Produk masuk keranjang!");
+}
+</script>
+
 </body>
 </html>
+
 
 
