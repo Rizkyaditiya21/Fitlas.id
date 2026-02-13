@@ -145,4 +145,72 @@ section{
 <h3>Moon Dew</h3>
 <p>Fresh • Calm • Elegant</p>
 <div class="old-price">Rp 79.000</div>
-<div class
+<div class="price">Rp 63.200</div>
+<button onclick="addToCart('Moon Dew',79000,'moondew.png')">Tambah ke Keranjang</button>
+</div>
+
+<div class="card">
+<span class="badge">🆕 New</span>
+<img src="images/moonblush.png">
+<h3>Moon Blush</h3>
+<p>Soft • Floral • Premium</p>
+<div class="old-price">Rp 79.000</div>
+<div class="price">Rp 63.200</div>
+<button onclick="addToCart('Moon Blush',79000,'moonblush.png')">Tambah ke Keranjang</button>
+</div>
+
+<div class="card">
+<img src="images/velvet.png">
+<h3>Velvet Kiss</h3>
+<p>Sweet • Sexy</p>
+<div class="old-price">Rp 79.000</div>
+<div class="price">Rp 63.200</div>
+<button onclick="addToCart('Velvet Kiss',79000,'velvet.png')">Tambah ke Keranjang</button>
+</div>
+
+<div class="card">
+<span class="badge">🔥 Best Seller</span>
+<img src="images/sugar.png">
+<h3>Sugar Rush</h3>
+<p>Sweet • Playful • Addictive</p>
+<div class="old-price">Rp 69.000</div>
+<div class="price">Rp 55.200</div>
+<button onclick="addToCart('Sugar Rush',69000,'sugar.png')">Tambah ke Keranjang</button>
+</div>
+
+</div>
+</section>
+
+<footer style="background:#020617;text-align:center;padding:40px 20px;font-size:14px;color:#94a3b8;">
+© 2026 FITLAS Perfume Marketplace<br>
+📍 Indonesia
+</footer>
+
+<script>
+function addToCart(name, price, image){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const discount = 0.2;
+  const flashSale = true;
+  let finalPrice = flashSale ? price - (price * discount) : price;
+
+  const existing = cart.find(item => item.name === name);
+
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({
+      name: name,
+      price: finalPrice,
+      image: image,
+      qty: 1
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Produk masuk keranjang!");
+}
+</script>
+
+</body>
+</html>
