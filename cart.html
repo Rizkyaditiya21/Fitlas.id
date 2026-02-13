@@ -13,24 +13,63 @@ body{
   padding:20px;
 }
 h1{text-align:center}
+
 .item{
   background:#fff;
   padding:15px;
   border-radius:12px;
   display:flex;
-  gap:15px;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:15px;
 }
+
+.left{
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+
 .item img{
   width:80px;
   border-radius:10px;
 }
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:5px;
+}
+
+.qty button{
+  padding:4px 10px;
+  background:#111;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  width:auto;
+}
+
+.remove{
+  background:red;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  width:auto;
+  margin-top:8px;
+}
+
 .total{
   font-weight:bold;
   font-size:18px;
   margin:20px 0;
 }
-button{
+
+.checkout{
   width:100%;
   padding:14px;
   background:#111;
@@ -40,6 +79,7 @@ button{
   font-size:16px;
   cursor:pointer;
 }
+
 .empty{
   text-align:center;
   opacity:.7;
@@ -54,34 +94,70 @@ button{
 <div id="cart-items"></div>
 <div class="total" id="total"></div>
 
-<button onclick="checkout()">Checkout via WhatsApp</button>
+<button class="checkout" onclick="checkout()">Checkout via WhatsApp</button>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let container = document.getElementById("cart-items");
-let total = 0;
-let message = "Halo admin FITLAS,%0A%0ASaya mau order:%0A";
 
-if(cart.length === 0){
-  container.innerHTML = "<p class='empty'>Keranjang masih kosong</p>";
-}else{
-  cart.forEach(item=>{
-    total += item.price;
+function renderCart(){
+  container.innerHTML = "";
+  let total = 0;
+
+  if(cart.length === 0){
+    container.innerHTML = "<p class='empty'>Keranjang masih kosong</p>";
+    document.getElementById("total").innerText = "";
+    return;
+  }
+
+  cart.forEach((item,index)=>{
+    if(!item.qty) item.qty = 1;
+
+    let subtotal = item.price * item.qty;
+    total += subtotal;
+
     container.innerHTML += `
       <div class="item">
-        <img src="${item.image}">
-        <div>
-          <strong>${item.name}</strong><br>
-          Rp ${item.price.toLocaleString()}
+        <div class="left">
+          <img src="images/${item.image}">
+          <div>
+            <strong>${item.name}</strong><br>
+            Rp ${item.price.toLocaleString()}<br>
+            Subtotal: Rp ${subtotal.toLocaleString()}
+            
+            <div class="qty">
+              <button onclick="changeQty(${index}, -1)">-</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty(${index}, 1)">+</button>
+            </div>
+
+            <button class="remove" onclick="removeItem(${index})">Hapus</button>
+          </div>
         </div>
       </div>
     `;
-    message += `- ${item.name} : Rp ${item.price.toLocaleString()}%0A`;
   });
+
+  document.getElementById("total").innerText =
+    "Total: Rp " + total.toLocaleString();
 }
 
-document.getElementById("total").innerText =
-  "Total: Rp " + total.toLocaleString();
+function changeQty(index, change){
+  cart[index].qty += change;
+
+  if(cart[index].qty <= 0){
+    cart.splice(index,1);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
 
 function checkout(){
   if(cart.length === 0){
@@ -89,15 +165,25 @@ function checkout(){
     return;
   }
 
+  let total = 0;
+  let message = "Halo admin FITLAS,%0A%0ASaya mau order:%0A";
+
+  cart.forEach(item=>{
+    let subtotal = item.price * item.qty;
+    total += subtotal;
+    message += `- ${item.name} (${item.qty}x) : Rp ${subtotal.toLocaleString()}%0A`;
+  });
+
   message += `%0A*Total: Rp ${total.toLocaleString()}*%0A%0A`;
-  message += `Pembayaran:%0A`;
   message += `Transfer BCA 0990600325 a/n RIZKY ADITIYA%0A`;
   message += `atau QRIS (kirim bukti)%0A%0A`;
   message += `Alamat pengiriman:%0A`;
 
-  let wa = "62882000111956"; // GANTI DENGAN NO WA KAMU
+  let wa = "62882000111956";
   window.open(`https://wa.me/${wa}?text=${message}`);
 }
+
+renderCart();
 </script>
 
 </body>
