@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>FITLAS – Perfume Marketplace</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<a href="cara-order.html" style="margin-right:15px;color:#fff;">Cara Order</a>
 
 <style>
 *{box-sizing:border-box}
@@ -151,74 +150,53 @@ footer{
 
 <div class="products">
 
+<!-- Noir Desire -->
 <div class="card">
 <span class="badge">🔥 Best Seller</span>
-<img src="assets/img/noir-desire.jpg" alt="FITLAS Noir Desire">
-<h3>FITLAS noir-desire</h3>
+<img src="images/noir.jpg" alt="Noir Desire">
+<h3>Noir Desire</h3>
 <p>Maskulin • Elegan</p>
 <div class="price">Rp 89.000</div>
-<button onclick="addToCart('FITLAS noir-desire',89000,'<img src="assets/img/noir-desire.png" alt="Noir desire">
-Tambah ke Keranjang
-</button>
+<button onclick="addToCart('Noir Desire',89000)">Tambah ke Keranjang</button>
 </div>
 
-<div class="card">
-<span class="badge">🆕 New</span>
-<img src="https://images.unsplash.com/photo-1594035910387-fea47794261f">
-<h3>FITLAS Moon Blush</h3>
-<p>Soft • Floral  • Premium</p>
-<div class="price">Rp 79.000</div>
-<button onclick="addToCart('FITLAS Melon Blanc',79000,'https://images.unsplash.com/photo-1594035910387-fea47794261f')">
-Tambah ke Keranjang
-</button>
-</div>
-
-<div class="card">
-<img src="assets/img/velvet-kiss.png" alt="velvet-kiss">
-<h3>FITLAS velvet-kiss</h3>
-<p>Sweet • Sexy</p>
-<div class="price">Rp 79.000</div>
-<button onclick="addToCart('FITLAS velvet-kiss',79000,<img src="assets/img/velvet-kiss.png" alt="velvet-kiss">
-Tambah ke Keranjang
-</button>
-</div>
-
+<!-- Moon Dew -->
 <div class="card">
 <span class="badge">⭐ Favorit</span>
-<img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519">
-<h3>FITLAS Moon Dew</h3>
-<p>Fresh  • Calm • Elegant</p>
+<img src="images/moondew.jpg" alt="Moon Dew">
+<h3>Moon Dew</h3>
+<p>Fresh • Calm • Elegant</p>
 <div class="price">Rp 150.000</div>
-<button onclick="addToCart('FITLAS Oud',150000,'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519')">
-Tambah ke Keranjang
-</button>
+<button onclick="addToCart('Moon Dew',150000)">Tambah ke Keranjang</button>
 </div>
 
-  <div class="card">
-<span class="badge">🔥 Best Seller</span>
-<img src="LINK_FOTO">
-<h3>FITLAS Sugar Rush</h3>
-<p>DESKRIPSI SINGKAT</p>
-<div class="price">Rp 150.000</div>
-<button onclick="addToCart('FITLAS Sugar Rush',150000,'LINK_FOTO')">
-Tambah ke Keranjang
-</button>
-</div>
-
-  <div class="products">
-
-</div>
-
-<!-- 3 -->
+<!-- Moon Blush -->
 <div class="card">
-<img src="https://via.placeholder.com/300">
-<h3>FITLAS – Azure Blue</h3>
-<p>Fresh, clean & sporty</p>
-<div class="price">Rp 159.000</div>
-<button onclick="addToCart('Azure Blue',159000)">Tambah</button>
+<span class="badge">🆕 New</span>
+<img src="images/moonblush.jpg" alt="Moon Blush">
+<h3>Moon Blush</h3>
+<p>Soft • Floral • Premium</p>
+<div class="price">Rp 79.000</div>
+<button onclick="addToCart('Moon Blush',79000)">Tambah ke Keranjang</button>
 </div>
 
+<!-- Velvet Kiss -->
+<div class="card">
+<img src="images/velvet.jpg" alt="Velvet Kiss">
+<h3>Velvet Kiss</h3>
+<p>Sweet • Sexy</p>
+<div class="price">Rp 79.000</div>
+<button onclick="addToCart('Velvet Kiss',79000)">Tambah ke Keranjang</button>
+</div>
 
+<!-- Sugar Rush -->
+<div class="card">
+<span class="badge">🔥 Best Seller</span>
+<img src="images/sugar.jpg" alt="Sugar Rush">
+<h3>Sugar Rush</h3>
+<p>Sweet • Playful • Addictive</p>
+<div class="price">Rp 150.000</div>
+<button onclick="addToCart('Sugar Rush',150000)">Tambah ke Keranjang</button>
 </div>
 
 </div>
@@ -234,50 +212,16 @@ Tambah ke Keranjang
 </section>
 
 <footer>
-  <div style="margin-bottom:15px;">
-    <a href="https://instagram.com/artaadityaa.f" target="_blank" style="margin:0 10px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="28">
-    </a>
-
-    <a href="https://wa.me/62882000111956" target="_blank" style="margin:0 10px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="28">
-    </a>
-  </div>
-
-  © 2026 FITLAS Perfume Marketplace<br>
-  📍 Indonesia
+© 2026 FITLAS Perfume Marketplace<br>
+📍 Indonesia
 </footer>
 
-
 <script>
-function addToCart(name, price, image){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({name, price, image});
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Produk masuk keranjang");
-}
-</script>
-<a href="https://wa.me/62882000111956" target="_blank"
-style="
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-padding:15px;
-border-radius:50%;
-box-shadow:0 10px 25px rgba(0,0,0,.4);
-z-index:999;
-">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="32">
-</a>
-
-  <script>
-const discount = 0.2; // 20% diskon
-const flashSale = true;
-
 function addToCart(name, price){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+  const discount = 0.2;
+  const flashSale = true;
   let finalPrice = flashSale ? price - (price * discount) : price;
 
   cart.push({
@@ -292,12 +236,3 @@ function addToCart(name, price){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
