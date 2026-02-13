@@ -15,7 +15,6 @@ body{
 }
 a{text-decoration:none;color:inherit}
 
-/* HEADER */
 header{
   display:flex;
   justify-content:space-between;
@@ -35,7 +34,6 @@ header h1{letter-spacing:4px;margin:0}
   font-weight:bold;
 }
 
-/* HERO */
 .hero{
   text-align:center;
   padding:90px 20px;
@@ -53,7 +51,6 @@ header h1{letter-spacing:4px;margin:0}
   font-weight:bold;
 }
 
-/* SECTION */
 section{
   max-width:1200px;
   margin:auto;
@@ -65,7 +62,6 @@ section{
   margin-bottom:50px;
 }
 
-/* PRODUCTS */
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
@@ -98,6 +94,11 @@ section{
 .card h3{margin:12px 0 6px}
 .card p{font-size:13px;opacity:.75}
 .price{font-weight:700;margin:10px 0}
+.old-price{
+  text-decoration:line-through;
+  font-size:13px;
+  opacity:.6;
+}
 .card button{
   width:100%;
   padding:12px;
@@ -106,28 +107,6 @@ section{
   background:#020617;
   color:#fff;
   cursor:pointer;
-}
-
-/* TESTI */
-.testi{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-.testi div{
-  background:#fff;
-  color:#020617;
-  padding:25px;
-  border-radius:20px;
-}
-
-/* FOOTER */
-footer{
-  background:#020617;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-  color:#94a3b8;
 }
 </style>
 </head>
@@ -150,91 +129,20 @@ footer{
 
 <div class="products">
 
-<!-- Noir Desire -->
 <div class="card">
 <span class="badge">🔥 Best Seller</span>
-<img src="images/noir.png" alt="Noir Desire">
+<img src="images/noir.png">
 <h3>Noir Desire</h3>
 <p>Maskulin • Elegan</p>
-<div class="price">Rp 89.000</div>
-<button onclick="addToCart('Noir Desire',89000)">Tambah ke Keranjang</button>
+<div class="old-price">Rp 89.000</div>
+<div class="price">Rp 71.200</div>
+<button onclick="addToCart('Noir Desire',89000,'noir.png')">Tambah ke Keranjang</button>
 </div>
 
-<!-- Moon Dew -->
 <div class="card">
 <span class="badge">⭐ Favorit</span>
-<img src="images/moondew.png" alt="Moon Dew">
+<img src="images/moondew.png">
 <h3>Moon Dew</h3>
 <p>Fresh • Calm • Elegant</p>
-<div class="price">Rp 79.000</div>
-<button onclick="addToCart('Moon Dew',79000)">Tambah ke Keranjang</button>
-</div>
-
-<!-- Moon Blush -->
-<div class="card">
-<span class="badge">🆕 New</span>
-<img src="images/moonblush.png" alt="Moon Blush">
-<h3>Moon Blush</h3>
-<p>Soft • Floral • Premium</p>
-<div class="price">Rp 79.000</div>
-<button onclick="addToCart('Moon Blush',79000)">Tambah ke Keranjang</button>
-</div>
-
-<!-- Velvet Kiss -->
-<div class="card">
-<img src="images/velvet.png" alt="Velvet Kiss">
-<h3>Velvet Kiss</h3>
-<p>Sweet • Sexy</p>
-<div class="price">Rp 79.000</div>
-<button onclick="addToCart('Velvet Kiss',79000)">Tambah ke Keranjang</button>
-</div>
-
-<!-- Sugar Rush -->
-<div class="card">
-<span class="badge">🔥 Best Seller</span>
-<img src="images/sugar.png" alt="Sugar Rush">
-<h3>Sugar Rush</h3>
-<p>Sweet • Playful • Addictive</p>
-<div class="price">Rp 69.000</div>
-<button onclick="addToCart('Sugar Rush',69000)">Tambah ke Keranjang</button>
-</div>
-
-</div>
-</section>
-
-<section>
-<h2 class="title">Apa Kata Customer</h2>
-<div class="testi">
-<div>⭐⭐⭐⭐⭐<br>“Aromanya tahan lama & elegan”<br><b>— Andi, Jakarta</b></div>
-<div>⭐⭐⭐⭐⭐<br>“Packing rapi, respon cepat”<br><b>— Rina, Bandung</b></div>
-<div>⭐⭐⭐⭐⭐<br>“Wanginya beda dari yang lain”<br><b>— Fajar, Surabaya</b></div>
-</div>
-</section>
-
-<footer>
-© 2026 FITLAS Perfume Marketplace<br>
-📍 Indonesia
-</footer>
-
-<script>
-function addToCart(name, price){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const discount = 0.2;
-  const flashSale = true;
-  let finalPrice = flashSale ? price - (price * discount) : price;
-
-  cart.push({
-    name:name,
-    price:finalPrice
-  });
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Produk masuk keranjang!");
-}
-</script>
-
-</body>
-</html>
-
-
+<div class="old-price">Rp 79.000</div>
+<div class
