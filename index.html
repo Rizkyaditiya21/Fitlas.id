@@ -212,5 +212,100 @@ function addToCart(name, price, image){
 }
 </script>
 
+  <!-- FLOATING WHATSAPP + INSTAGRAM -->
+<style>
+.floating-container{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:999;
+}
+
+/* WHATSAPP */
+.wa-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#25D366;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:40px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s;
+  animation:float 2s infinite;
+}
+
+.wa-box:hover{
+  transform:scale(1.05);
+}
+
+.wa-icon{
+  font-size:22px;
+}
+
+/* INSTAGRAM */
+.ig-box{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  color:#fff;
+  background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  text-decoration:none;
+  transition:.3s;
+}
+
+.ig-box:hover{
+  transform:scale(1.1);
+}
+
+/* FLOAT ANIMATION */
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  .wa-box span{
+    display:none;
+  }
+  .wa-box{
+    padding:12px;
+    border-radius:50%;
+  }
+}
+</style>
+
+<div class="floating-container">
+
+  <!-- GANTI NOMOR WA -->
+  <a href="https://wa.me/62882000111956?text=Halo%20Admin%20FITLAS%2C%20saya%20mau%20tanya%20produk"
+     target="_blank"
+     class="wa-box">
+     <span class="wa-icon">💬</span>
+     <span>Chat Admin</span>
+  </a>
+
+  <!-- GANTI USERNAME IG -->
+  <a href="https://instagram.com/artaadityaa.f"
+     target="_blank"
+     class="ig-box">
+     📷
+  </a>
+
+</div>
+
 </body>
 </html>
+
