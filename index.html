@@ -121,6 +121,12 @@ section{
 <section class="hero">
 <h2>Premium Perfume Marketplace</h2>
 <p>Aroma elegan • Tahan lama • Kirim seluruh Indonesia</p>
+  
+<p style="margin-top:15px;font-size:18px;">
+⏳ Flash Sale Berakhir Dalam:
+<span id="countdown"></span>
+</p>
+  
 <a href="#produk">Belanja Sekarang</a>
 </section>
 
@@ -353,8 +359,92 @@ setInterval(()=>{
 },10000);
 </script>
 
+<!-- POPUP DISKON -->
+<style>
+.discount-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+.discount-popup.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.popup-box{
+  background:#fff;
+  color:#020617;
+  padding:35px;
+  border-radius:20px;
+  text-align:center;
+  max-width:350px;
+  animation:scaleIn .3s ease;
+}
+.popup-box h3{
+  margin-top:0;
+}
+.popup-box button{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  border-radius:25px;
+  background:#020617;
+  color:#fff;
+  cursor:pointer;
+}
+@keyframes scaleIn{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+</style>
+
+<div class="discount-popup" id="discountPopup">
+  <div class="popup-box">
+    <h3>🎉 DISKON 10% HARI INI!</h3>
+    <p>Gunakan kode: <b>FITLAS10</b><br>Berlaku 24 jam.</p>
+    <button onclick="closePopup()">Ambil Sekarang</button>
+  </div>
+</div>
+
+<script>
+setTimeout(()=>{
+  document.getElementById("discountPopup").classList.add("active");
+},5000);
+
+function closePopup(){
+  document.getElementById("discountPopup").classList.remove("active");
+}
+</script>
+
+  <script>
+let endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+
+let x = setInterval(function(){
+  let now = new Date().getTime();
+  let distance = endTime - now;
+
+  let hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+  let seconds = Math.floor((distance % (1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+  hours + "j " + minutes + "m " + seconds + "d";
+
+  if(distance < 0){
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "SELESAI";
+  }
+},1000);
+</script>
 
 </body>
 </html>
+
 
 
