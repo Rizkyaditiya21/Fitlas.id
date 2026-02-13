@@ -5,6 +5,39 @@
 <title>FITLAS – Perfume Marketplace</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  .flash-box{
+  margin-top:25px;
+  background:#111827;
+  padding:20px;
+  border-radius:20px;
+  display:inline-block;
+  box-shadow:0 0 30px rgba(255,0,0,.4);
+}
+
+.flash-title{
+  font-weight:bold;
+  color:#f87171;
+  margin-bottom:10px;
+  animation:blink 1s infinite;
+}
+
+.flash-timer{
+  font-size:28px;
+  font-weight:800;
+  color:#ef4444;
+}
+
+.flash-stock{
+  margin-top:8px;
+  font-size:14px;
+  color:#facc15;
+}
+
+@keyframes blink{
+  0%{opacity:1}
+  50%{opacity:.4}
+  100%{opacity:1}
+}
 <style>
 *{box-sizing:border-box}
 body{
@@ -444,8 +477,33 @@ let x = setInterval(function(){
 },1000);
 </script>
 
+  <script>
+function updateCountdown(){
+  let now = new Date();
+  let midnight = new Date();
+  midnight.setHours(23,59,59,999);
+
+  let distance = midnight - now;
+
+  let hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+  let seconds = Math.floor((distance % (1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+  hours + "j : " + minutes + "m : " + seconds + "d";
+
+  if(distance < 0){
+    updateCountdown();
+  }
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+</script>
+
 </body>
 </html>
+
 
 
 
